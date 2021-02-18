@@ -2,8 +2,8 @@ module.exports = {
   theme: {
     extend: {
       width: {
-        'button': '12.5rem',
-        '2/7': '28.5714286%',
+        'primaryButton': '12.5rem',
+        'primaryInput': '16.875rem',
         '3/7': '42.8571429%',
         '4/7': '57.1428571%',
         '5/7': '71.4285714%',
@@ -11,20 +11,20 @@ module.exports = {
       }
     },
     height: {
-      button: '2.8125rem',
-      md: '16px',
+      primaryButton: '2.8125rem',
+      primaryInput: '3.125rem',
       lg: '24px',
       xl: '48px',
     },
     backgroundColor: theme => ({
       ...theme('colors'),
       'primary': '#00001e',
-      'secondary': '#ffed4a',
-      'danger': '#e3342f',
+      'secondary': '#F4F4F4',
+      'tertiary': '#E4E4E4',
     }),
     borderRadius: {
       'button': '0.625rem',
-      'sm': '0.125rem',
+      'input': '1.25rem',
       DEFAULT: '0.25rem',
       DEFAULT: '4px',
       'md': '0.375rem',
@@ -39,6 +39,13 @@ module.exports = {
       'secondary': '#ffed4a',
       'danger': '#e3342f',
     }),
+    textColor: theme => theme('colors'),
+      textColor: {
+        'primary': '#000000',
+        'secondary': '#F4F4F4',
+        'primaryButtonHover': '#BABABA',
+        'secondaryButtonHover': '#343434',
+    },
     borderWidth: {
       DEFAULT: '1px',
         'button': '2px',

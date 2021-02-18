@@ -18,12 +18,12 @@ const Input: FC<InputProps> = (props: InputProps) => {
   const { label, type = 'text', placeholder, onChange, value, required = false, disabled = false } = props;
 
   return (
-    <div className="flex items-center justify-center flex-col mb-3.5">
-      <label htmlFor="" className="text-2xl font-thin">
+    <div className={'flex items-center justify-center flex-col mb-3.5'}>
+      <label htmlFor="" className={'text-lg font-normal mb-2'}>
         {label}
       </label>
       <input
-        className="w-72 h-12 text-lg text-center rounded-tl-3xl rounded-br-3xl outline-none bg-gray-200 focus:ring-2 focus:ring-black"
+        className={'w-primaryInput h-primaryInput text-lg text-center rounded-tl-input rounded-br-input outline-none bg-tertiary focus:ring-2 focus:ring-black'}
         type={type}
         placeholder={placeholder}
         value={value}
