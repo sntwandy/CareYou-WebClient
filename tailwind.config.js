@@ -4,7 +4,8 @@ module.exports = {
       width: {
         'primaryButton': '12.5rem',
         'primaryInput': '16.875rem',
-        '3/7': '42.8571429%',
+        'buttonMiddle': '7.313rem',
+        'title': '16.875rem',
         '4/7': '57.1428571%',
         '5/7': '71.4285714%',
         '6/7': '85.7142857%',
@@ -13,8 +14,10 @@ module.exports = {
     height: {
       primaryButton: '2.8125rem',
       primaryInput: '3.125rem',
+      title: '2.625rem',
+      sufferingDiv: '25rem',
       lg: '24px',
-      xl: '48px',
+      full: '100vh',
     },
     backgroundColor: theme => ({
       ...theme('colors'),

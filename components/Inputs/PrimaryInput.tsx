@@ -9,13 +9,14 @@ export interface InputProps {
   value: any;
   type?: string;
   placeholder?: string;
+  position?: string;
   label: string;
   required?: boolean;
   disabled?: boolean;
 }
 
 const Input: FC<InputProps> = (props: InputProps) => {
-  const { label, type = 'text', placeholder, onChange, value, required = false, disabled = false } = props;
+  const { label, type = 'text', placeholder, onChange, value, required = false, disabled = false, position } = props;
 
   return (
     <div className={'flex items-center justify-center flex-col mb-3.5'}>
@@ -23,7 +24,7 @@ const Input: FC<InputProps> = (props: InputProps) => {
         {label}
       </label>
       <input
-        className={'w-primaryInput h-primaryInput text-lg text-center rounded-tl-input rounded-br-input outline-none bg-tertiary focus:ring-2 focus:ring-black'}
+        className={`w-primaryInput h-primaryInput text-lg text-center rounded-tl-input rounded-br-input outline-none bg-tertiary focus:ring-2 focus:ring-black ${position}`}
         type={type}
         placeholder={placeholder}
         value={value}

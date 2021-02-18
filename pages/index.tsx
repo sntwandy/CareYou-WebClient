@@ -2,9 +2,11 @@
  *
  */
 
+import React ,{ FC, ReactElement } from 'react';
 import Link from 'next/link';
 
-const Home = () => {
+// Home page
+const Index: FC = (): ReactElement => {
   return (
     <div>
       <h1 className={'text-sm'}>Hello World</h1>
@@ -14,4 +16,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Index;
