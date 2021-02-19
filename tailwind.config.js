@@ -6,9 +6,10 @@ module.exports = {
         'primaryInput': '16.875rem',
         'buttonMiddle': '7.313rem',
         'title': '16.875rem',
-        '4/7': '57.1428571%',
-        '5/7': '71.4285714%',
-        '6/7': '85.7142857%',
+        'menuButton': '3.313rem',
+        'menuIcon': '1.25rem',
+        'menu': '10.131rem',
+        'menuImg': '4.375rem',
       }
     },
     height: {
@@ -16,7 +17,8 @@ module.exports = {
       primaryInput: '3.125rem',
       title: '2.625rem',
       sufferingDiv: '25rem',
-      lg: '24px',
+      menuButton: '2.688rem',
+      menu: '29.125rem',
       full: '100vh',
     },
     backgroundColor: theme => ({
