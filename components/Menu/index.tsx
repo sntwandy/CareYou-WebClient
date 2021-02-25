@@ -16,9 +16,9 @@ const Menu: FC = (): ReactElement => {
 
   useEffect(() => {
     if (menuIsOpen) {
-      setMenuOpenStyle('transform opacity-100 scale-100 transition ease-out duration-100 translate-x-4')
+      setMenuOpenStyle('transform opacity-100 scale-100 transition ease-out duration-100 translate-x-4 visible')
     } else {
-      setMenuOpenStyle('transition ease-in duration-75 transform opacity-0 scale-95')
+      setMenuOpenStyle('transition ease-in duration-75 transform opacity-0 scale-95 invisible')
     }
   }, [menuIsOpen]);
 
