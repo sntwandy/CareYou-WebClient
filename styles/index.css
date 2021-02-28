@@ -16,3 +16,17 @@
 body {
   background-color: #F4F4F4;
 }
+
+input[type='radio']:checked:after {
+  background-color: #00001e;
+  border-radius: 15px;
+  border: 1px solid #F4F4F4;
+  content: '';
+  display: inline-block;
+  height: 15px;
+  left: -1px;
+  position: relative;
+  top: -6px;
+  visibility: visible;
+  width: 15px;
+}
