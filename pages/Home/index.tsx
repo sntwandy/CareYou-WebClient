@@ -24,11 +24,13 @@ const Home: FC = (): ReactElement => {
     { name: 'Sneezing' },
   ]
 
-  // Filter init state
+  // Init state
   const filteredInitState: ISearch[] = [];
+  const symptomsInitState: string[] = []
 
   // Filtered symptoms state
   const [filteredSymptoms, setFilteredSymptoms] = useState(filteredInitState)
+  const [symptoms, setSymptoms] = useState(symptomsInitState)
 
   // Handle input search
   const handleInputSearch = (e: ChangeEvent<HTMLInputElement>) => {
@@ -41,21 +43,24 @@ const Home: FC = (): ReactElement => {
       filtered = data.filter((symptom) => {
         return symptom.name.toLocaleLowerCase().includes(searchString)
       });
+
       setFilteredSymptoms([
         ...filtered
       ])
     }
-    console.log(filteredSymptoms)
+    // console.log(filteredSymptoms)
   }
+
+  console.log(symptoms)
 
   return (
     <div className={'w-full h-full'}>
       {/* Menu */}
       <Menu />
       {/* Title */}
-      <div className={'flex items-center justify-center flex-col mt-20'}>
+      <div className={'flex items-center justify-center flex-col'}>
         <Title title={'Good Morning,'} fontSize={'text-lg'} fontWeight={'font-light'} />
-        <Title title={'Welcome to CareYou'} fontSize={'text-lg'} fontWeight={'font-light'} />
+        <Title title={'Welcome to CareYou'} fontSize={'text-lg'} marginTop={'mt-2'} fontWeight={'font-light'} />
       </div>
       {/* Inputs */}
       <div className={'flex items-center justify-center flex-col mt-8'}>
@@ -68,10 +73,10 @@ const Home: FC = (): ReactElement => {
             onChange={(e) => handleInputSearch(e)}
           />
           <div className={''}>
-            <ul>
+            <ul className={'w-primaryInput h-auto text-center mt-2'}>
               {filteredSymptoms.map((item) => {
                 return (
-                  <li>{item.name}</li>
+                  <li onClick={(e) => setSymptoms([...symptoms, e.currentTarget.innerText])}>{item.name}</li>
                 )
               })}
             </ul>
