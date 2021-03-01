@@ -10,7 +10,8 @@ import Title from '../../components/Titles/Title';
 
 // Search interface type
 interface ISearch {
-  name: string
+  id: number;
+  name: string;
 }
 
 // Home Page
@@ -18,21 +19,21 @@ const Home: FC = (): ReactElement => {
 
   // Mock data [provisional]
   const data: ISearch[] = [
-    { name: 'Headache' },
-    { name: 'Fever' },
-    { name: 'Eye pain' },
-    { name: 'Sneezing' },
+    { id: 1, name: 'Headache' },
+    { id: 2, name: 'Fever' },
+    { id: 3, name: 'Eye pain' },
+    { id: 4, name: 'Sneezing' },
   ]
 
-  // Init state
+  // Init states
   const filteredInitState: ISearch[] = [];
   const symptomsInitState: string[] = []
 
-  // Filtered symptoms state
+  // States
   const [filteredSymptoms, setFilteredSymptoms] = useState(filteredInitState)
   const [symptoms, setSymptoms] = useState(symptomsInitState)
 
-  // Handle input search
+  // Handle input search [filter]
   const handleInputSearch = (e: ChangeEvent<HTMLInputElement>) => {
     let filtered: ISearch[] = [];
     const searchString = e.target.value.toLowerCase();
@@ -48,10 +49,24 @@ const Home: FC = (): ReactElement => {
         ...filtered
       ])
     }
-    // console.log(filteredSymptoms)
   }
 
-  console.log(symptoms)
+  // Handle the event, to set the symptoms
+  const setMySymptoms = (symptom: string) => {
+
+    let repeatSymptom: boolean = false
+
+    for (const symp in symptoms) {
+      symptoms[symp] === symptom && (repeatSymptom = true)
+    }
+
+    repeatSymptom ? alert(`You have already selected "${symptom}" symptom`) : setSymptoms([...symptoms, symptom])
+  }
+
+  // Handle component update
+  useEffect(() => {
+    console.table(symptoms)
+  }, [symptoms])
 
   return (
     <div className={'w-full h-full'}>
@@ -76,7 +91,7 @@ const Home: FC = (): ReactElement => {
             <ul className={'w-primaryInput h-auto text-center mt-2'}>
               {filteredSymptoms.map((item) => {
                 return (
-                  <li onClick={(e) => setSymptoms([...symptoms, e.currentTarget.innerText])}>{item.name}</li>
+                  <li key={item.id} onClick={(e) => setMySymptoms(e.currentTarget.innerText)} className={'cursor-pointer'}>{item.name}</li>
                 )
               })}
             </ul>
