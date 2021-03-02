@@ -7,6 +7,7 @@ import React, { ChangeEvent, FC, ReactElement, useEffect, useState } from 'react
 // Components
 import Menu from '../../components/Menu';
 import Title from '../../components/Titles/Title';
+import WarningModal from '../../components/Modals/Warning';
 
 // Search interface type
 interface ISearch {
@@ -30,8 +31,11 @@ const Home: FC = (): ReactElement => {
   const symptomsInitState: string[] = []
 
   // States
+  const [toDeleteSymptom, setToDeleteSymptom] = useState('')
+  const [toDeleteSymptomConfirm, setToDeleteSymptomConfirm] = useState(false)
   const [filteredSymptoms, setFilteredSymptoms] = useState(filteredInitState)
   const [symptoms, setSymptoms] = useState(symptomsInitState)
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
 
   // Handle input search [filter]
   const handleInputSearch = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -75,6 +79,11 @@ const Home: FC = (): ReactElement => {
     console.table(symptoms)
   }, [symptoms])
 
+  useEffect(() => {
+    toDeleteSymptomConfirm && deleteSymptom(toDeleteSymptom);
+    setToDeleteSymptomConfirm(false);
+  }, [toDeleteSymptomConfirm])
+
   return (
     <div className={'w-full h-full'}>
       {/* Menu */}
@@ -113,8 +122,8 @@ const Home: FC = (): ReactElement => {
                   return (
                     <li className={'pl-4'}>{symp}
                       <span className={'font-light cursor-pointer ml-2'} onClick={() => {
-                        alert(`Are you sure you want to delete "${symp}" symptom?`)
-                        deleteSymptom(symp)
+                        setToDeleteSymptom(symp)
+                        setMenuIsOpen(!menuIsOpen)
                       }}>
                         X
                       </span>
@@ -124,6 +133,9 @@ const Home: FC = (): ReactElement => {
             </ul>
           </div>
         </div>
+      </div>
+      <div className={menuIsOpen ? 'visible': 'invisible'}>
+        <WarningModal menuIsOpen={menuIsOpen} setMenuIsOpen={setMenuIsOpen} toDeleteSymptom={toDeleteSymptom} setToDeleteSymptomConfirm={setToDeleteSymptomConfirm} />
       </div>
       {/* <button>Add</button> */}
     </div>
