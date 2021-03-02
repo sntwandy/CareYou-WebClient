@@ -34,7 +34,7 @@ const Home: FC = (): ReactElement => {
   const [symptoms, setSymptoms] = useState(symptomsInitState)
 
   // Handle input search [filter]
-  const handleInputSearch = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputSearch = (e: ChangeEvent<HTMLInputElement>): void => {
     let filtered: ISearch[] = [];
     const searchString = e.target.value.toLowerCase();
 
@@ -52,7 +52,7 @@ const Home: FC = (): ReactElement => {
   }
 
   // Handle the event, to set the symptoms
-  const setMySymptoms = (symptom: string) => {
+  const setMySymptoms = (symptom: string): void => {
 
     let repeatSymptom: boolean = false
 
@@ -61,6 +61,13 @@ const Home: FC = (): ReactElement => {
     }
 
     repeatSymptom ? alert(`You have already selected "${symptom}" symptom`) : setSymptoms([...symptoms, symptom])
+  }
+
+  // Handle delete symptom
+  const deleteSymptom = (s: string): void => {
+    setSymptoms(symptoms.filter(symptom => {
+      return symptom !== s
+    }))
   }
 
   // Handle component update
@@ -104,7 +111,14 @@ const Home: FC = (): ReactElement => {
             <ul className={'w-primaryInput h-selectedSym text-start p-4 flex items-start justify-start flex-wrap'}>
                 {symptoms.map((symp) => {
                   return (
-                    <li className={'pl-4'}>{symp} <span className={'font-light cursor-pointer'} onClick={() => alert(`Are you sure you want to delete "${symp}" symptom?`)}>X</span></li>
+                    <li className={'pl-4'}>{symp}
+                      <span className={'font-light cursor-pointer ml-2'} onClick={() => {
+                        alert(`Are you sure you want to delete "${symp}" symptom?`)
+                        deleteSymptom(symp)
+                      }}>
+                        X
+                      </span>
+                    </li>
                   )
                 })}
             </ul>
