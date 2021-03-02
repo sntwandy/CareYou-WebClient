@@ -19,6 +19,7 @@ module.exports = {
       sufferingDiv: '25rem',
       menuButton: '2.688rem',
       menu: '29.125rem',
+      selectedSym: '8.625rem',
       full: '100vh',
     },
     backgroundColor: theme => ({

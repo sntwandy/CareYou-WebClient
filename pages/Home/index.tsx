@@ -80,20 +80,33 @@ const Home: FC = (): ReactElement => {
       {/* Inputs */}
       <div className={'flex items-center justify-center flex-col mt-8'}>
         <div className={'flex items-center justify-center flex-col mb-3.5'}>
-          <label htmlFor="" className={'text-lg font-normal mb-2'}>Do you want to do a pre-diagnosis?</label>
+          <label htmlFor={'searchSymptoms'} className={'text-lg font-normal mb-2'}>Do you want to do a pre-diagnosis?</label>
           <input
             className={`w-primaryInput h-primaryInput text-lg text-center rounded-tl-input rounded-br-input outline-none bg-tertiary focus:ring-2 focus:ring-black`}
             type={'string'}
+            name={'searchSymptoms'}
             placeholder={'Search your symptoms'}
             onChange={(e) => handleInputSearch(e)}
           />
-          <div className={''}>
+          <div>
             <ul className={'w-primaryInput h-auto text-center mt-2'}>
               {filteredSymptoms.map((item) => {
                 return (
                   <li key={item.id} onClick={(e) => setMySymptoms(e.currentTarget.innerText)} className={'cursor-pointer'}>{item.name}</li>
                 )
               })}
+            </ul>
+          </div>
+        </div>
+        <div className={'flex items-center justify-center flex-col'}>
+          <label htmlFor={'symptomsSelected'} className={'text-lg font-normal mb-2'}>Your selected symptoms:</label>
+          <div className={'w-primaryInput h-selectedSym text-lg text-start rounded-tl-input rounded-br-input outline-none bg-tertiary focus:ring-2 focus:ring-black'}>
+            <ul className={'w-primaryInput h-selectedSym text-start p-4 flex items-start justify-start flex-wrap'}>
+                {symptoms.map((symp) => {
+                  return (
+                    <li className={'pl-4'}>{symp} <span className={'font-light cursor-pointer'} onClick={() => alert(`Are you sure you want to delete "${symp}" symptom?`)}>X</span></li>
+                  )
+                })}
             </ul>
           </div>
         </div>
