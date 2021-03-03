@@ -5,27 +5,28 @@
 import React, { FC, ReactElement, useEffect, useState } from 'react';
 
 interface IProps {
-  warningModal: boolean;
-  setWarningModal: (value: boolean) => void;
-  message: string;
+  warningModalToConfirm: boolean;
+  setWarningModalToConfirm: (value: boolean) => void;
+  toDeleteSymptom: string;
+  setToDeleteSymptomConfirm: (value: boolean) => void;
 }
 
 const WarningToConfirm: FC<IProps> = (props: IProps): ReactElement => {
-  const { warningModal, setWarningModal, message } = props;
+  const { warningModalToConfirm, setWarningModalToConfirm, toDeleteSymptom, setToDeleteSymptomConfirm } = props;
 
   // If menu is Open or Closed styles
   const [backgroundStyle, setBackgroundStyle] = useState('ease-in duration-200 opacity-0 invisible');
   const [modalStyle, setModalStyle] = useState('ease-in duration-200 opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95 invisible');
 
   useEffect(() => {
-    if (warningModal) {
+    if (warningModalToConfirm) {
       setBackgroundStyle('ease-out duration-300 opacity-100 visible');
       setModalStyle('ease-out duration-300 opacity-100 translate-y-0 sm:scale-100 visible');
     } else {
       setBackgroundStyle('ease-in duration-200 opacity-0 invisible');
       setModalStyle('ease-in duration-200 opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95 invisible');
     }
-  }, [warningModal]);
+  }, [warningModalToConfirm]);
 
   return (
     <div className={'fixed z-10 inset-0 overflow-y-auto'}>
@@ -47,7 +48,7 @@ const WarningToConfirm: FC<IProps> = (props: IProps): ReactElement => {
               </div>
               <div className={'mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left'}>
                 <h3 className={'text-lg leading-6 font-medium text-gray-900'} id={'modal-headline'}>
-                  {message}
+                Are you sure you want to delete "{toDeleteSymptom}" symptom?.
                 </h3>
               </div>
             </div>
@@ -57,10 +58,21 @@ const WarningToConfirm: FC<IProps> = (props: IProps): ReactElement => {
               type={'button'}
               className={'w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm'}
               onClick={() => {
-                setWarningModal(!warningModal);
+                setWarningModalToConfirm(!warningModalToConfirm);
+                setToDeleteSymptomConfirm(true);
               }}
             >
-              Okay
+              Yes
+            </button>
+            <button
+              type={'button'}
+              className={'mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm'}
+              onClick={() => {
+                setWarningModalToConfirm(!warningModalToConfirm);
+                setToDeleteSymptomConfirm(false);
+              }}
+            >
+              Cancel
             </button>
           </div>
         </div>

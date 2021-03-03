@@ -7,6 +7,7 @@ import React, { ChangeEvent, FC, ReactElement, useEffect, useState } from 'react
 // Components
 import Menu from '../../components/Menu';
 import Title from '../../components/Titles/Title';
+import WarningToConfirmModal from '../../components/Modals/WarningToConfirm';
 import WarningModal from '../../components/Modals/Warning';
 
 // Search interface type
@@ -35,7 +36,8 @@ const Home: FC = (): ReactElement => {
   const [toDeleteSymptomConfirm, setToDeleteSymptomConfirm] = useState(false)
   const [filteredSymptoms, setFilteredSymptoms] = useState(filteredInitState)
   const [symptoms, setSymptoms] = useState(symptomsInitState)
-  const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const [warningModalToConfirm, setWarningModalToConfirm] = useState(false);
+  const [warningModal, setWarningModal] = useState(false);
 
   // Handle input search [filter]
   const handleInputSearch = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -64,7 +66,7 @@ const Home: FC = (): ReactElement => {
       symptoms[symp] === symptom && (repeatSymptom = true)
     }
 
-    repeatSymptom ? alert(`You have already selected "${symptom}" symptom`) : setSymptoms([...symptoms, symptom])
+    repeatSymptom ? setWarningModal(true) : setSymptoms([...symptoms, symptom])
   }
 
   // Handle delete symptom
@@ -108,7 +110,13 @@ const Home: FC = (): ReactElement => {
             <ul className={'w-primaryInput h-auto text-center mt-2'}>
               {filteredSymptoms.map((item) => {
                 return (
-                  <li key={item.id} onClick={(e) => setMySymptoms(e.currentTarget.innerText)} className={'cursor-pointer'}>{item.name}</li>
+                  <li
+                    key={item.id}
+                    onClick={(e) => setMySymptoms(e.currentTarget.innerText)}
+                    className={'cursor-pointer'}
+                  >
+                      {item.name}
+                  </li>
                 )
               })}
             </ul>
@@ -120,10 +128,10 @@ const Home: FC = (): ReactElement => {
             <ul className={'w-primaryInput h-selectedSym text-start p-4 flex items-start justify-start flex-wrap'}>
                 {symptoms.map((symp) => {
                   return (
-                    <li className={'pl-4'}>{symp}
+                    <li key={symp} className={'pl-4'}>{symp}
                       <span className={'font-light cursor-pointer ml-2'} onClick={() => {
                         setToDeleteSymptom(symp)
-                        setMenuIsOpen(!menuIsOpen)
+                        setWarningModalToConfirm(!warningModalToConfirm)
                       }}>
                         X
                       </span>
@@ -134,8 +142,20 @@ const Home: FC = (): ReactElement => {
           </div>
         </div>
       </div>
-      <div className={menuIsOpen ? 'visible': 'invisible'}>
-        <WarningModal menuIsOpen={menuIsOpen} setMenuIsOpen={setMenuIsOpen} toDeleteSymptom={toDeleteSymptom} setToDeleteSymptomConfirm={setToDeleteSymptomConfirm} />
+      <div className={warningModalToConfirm ? 'visible': 'invisible'}>
+        <WarningToConfirmModal
+          warningModalToConfirm={warningModalToConfirm}
+          setWarningModalToConfirm={setWarningModalToConfirm}
+          toDeleteSymptom={toDeleteSymptom}
+          setToDeleteSymptomConfirm={setToDeleteSymptomConfirm}
+        />
+      </div>
+      <div className={warningModal ? 'visible': 'invisible'}>
+        <WarningModal
+          warningModal={warningModal}
+          setWarningModal={setWarningModal}
+          message={`You have already selected that symptom`}
+        />
       </div>
       {/* <button>Add</button> */}
     </div>
