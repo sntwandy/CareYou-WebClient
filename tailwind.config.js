@@ -8,7 +8,7 @@ module.exports = {
         'title': '16.875rem',
         'menuButton': '3.313rem',
         'menuIcon': '1.25rem',
-        'menu': '10.131rem',
+        'menu': '12.131rem',
         'menuImg': '4.375rem',
       }
     },

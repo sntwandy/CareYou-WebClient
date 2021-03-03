@@ -62,7 +62,7 @@ const SingUp: FC = (): ReactElement => {
           <img className={'w-full'} src={'https://i.imgur.com/N9aSUrx.png'} alt={'Login img'} />
         </figure>
         <div className={'mb-6'}>
-          <Title title={'Sing Up'} />
+          <Title title={'Sing Up'} marginTop={'mt-2'} />
         </div>
         <div className={'w-primaryInput h-8 rounded-input bg-secondary'}>
           <div className={'h-7 bg-primary rounded-input'} style={{ width: progress[step - 1] }} >

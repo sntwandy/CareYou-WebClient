@@ -9,6 +9,7 @@ import Menu from '../../components/Menu';
 import Title from '../../components/Titles/Title';
 import WarningToConfirmModal from '../../components/Modals/WarningToConfirm';
 import WarningModal from '../../components/Modals/Warning';
+import Button from '../../components/Buttons/PrimaryButton';
 
 // Search interface type
 interface ISearch {
@@ -29,13 +30,13 @@ const Home: FC = (): ReactElement => {
 
   // Init states
   const filteredInitState: ISearch[] = [];
-  const symptomsInitState: string[] = []
+  const symptomsInitState: string[] = [];
 
   // States
-  const [toDeleteSymptom, setToDeleteSymptom] = useState('')
-  const [toDeleteSymptomConfirm, setToDeleteSymptomConfirm] = useState(false)
-  const [filteredSymptoms, setFilteredSymptoms] = useState(filteredInitState)
-  const [symptoms, setSymptoms] = useState(symptomsInitState)
+  const [toDeleteSymptom, setToDeleteSymptom] = useState('');
+  const [toDeleteSymptomConfirm, setToDeleteSymptomConfirm] = useState(false);
+  const [filteredSymptoms, setFilteredSymptoms] = useState(filteredInitState);
+  const [symptoms, setSymptoms] = useState(symptomsInitState);
   const [warningModalToConfirm, setWarningModalToConfirm] = useState(false);
   const [warningModal, setWarningModal] = useState(false);
 
@@ -45,46 +46,53 @@ const Home: FC = (): ReactElement => {
     const searchString = e.target.value.toLowerCase();
 
     if (searchString == '') {
-      setFilteredSymptoms([])
+      setFilteredSymptoms([]);
     } else {
       filtered = data.filter((symptom) => {
-        return symptom.name.toLocaleLowerCase().includes(searchString)
+        return symptom.name.toLocaleLowerCase().includes(searchString);
       });
 
       setFilteredSymptoms([
         ...filtered
-      ])
-    }
-  }
+      ]);
+    };
+  };
 
   // Handle the event, to set the symptoms
   const setMySymptoms = (symptom: string): void => {
 
-    let repeatSymptom: boolean = false
+    let repeatSymptom: boolean = false;
 
     for (const symp in symptoms) {
-      symptoms[symp] === symptom && (repeatSymptom = true)
-    }
+      symptoms[symp] === symptom && (repeatSymptom = true);
+    };
 
-    repeatSymptom ? setWarningModal(true) : setSymptoms([...symptoms, symptom])
-  }
+    repeatSymptom ? setWarningModal(true) : setSymptoms([...symptoms, symptom]);
+  };
 
   // Handle delete symptom
   const deleteSymptom = (s: string): void => {
     setSymptoms(symptoms.filter(symptom => {
-      return symptom !== s
-    }))
-  }
+      return symptom !== s;
+    }));
+  };
+
+  // Handle Start test
+  const startTest = () => {
+    console.table(symptoms);
+  };
+
+  // Handle New test
+  const newTest = () => {
+    setSymptoms([]);
+    setFilteredSymptoms([]);
+  };
 
   // Handle component update
   useEffect(() => {
-    console.table(symptoms)
-  }, [symptoms])
-
-  useEffect(() => {
     toDeleteSymptomConfirm && deleteSymptom(toDeleteSymptom);
     setToDeleteSymptomConfirm(false);
-  }, [toDeleteSymptomConfirm])
+  }, [toDeleteSymptomConfirm]);
 
   return (
     <div className={'w-full h-full'}>
@@ -140,6 +148,12 @@ const Home: FC = (): ReactElement => {
                 })}
             </ul>
           </div>
+        </div>
+        <div className={'w-primaryInput mt-8 flex items-center justify-between flex-col'}>
+          <div className={'mb-4'}>
+            <Button label={'Start test'} onClick={startTest} full={true} />
+          </div>
+          <Button label={'New test'} inverted={true} onClick={newTest} />
         </div>
       </div>
       <div className={warningModalToConfirm ? 'visible': 'invisible'}>
