@@ -11,7 +11,7 @@ import useInput from '../../hooks/useInput';
 // Components
 import RadioGroup from '../../components/Inputs/RadioGroup';
 import Input from '../../components/Inputs/PrimaryInput';
-import Button from '../../components/Buttons/PrimaryButton';
+import RecordCard, { IRecord } from '../../components/UI/RecordCard';
 import Title from '../../components/Titles/Title';
 import Menu from '../../components/Menu';
 
@@ -34,6 +34,11 @@ const MedicalRecord: FC = (): ReactElement => {
     text: 'Older',
     value: 'older'
   }]
+  const records: IRecord[] = [{
+    date: new Date(),
+    attendant: 'Megan Herrera',
+    case: 'Flu'
+  }];
 
   return (
     <div className={'w-full h-full'}>
@@ -52,6 +57,9 @@ const MedicalRecord: FC = (): ReactElement => {
             <Input {...bindDate} type="select" label="Result:"/>
           </div>
         )}
+      </div>
+      <div className={'flex items-center justify-center flex-col'}>
+        {records.map((record, index) => <RecordCard key={index} record={record} />)}
       </div>
     </div>
   );
