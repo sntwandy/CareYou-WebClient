@@ -2,7 +2,7 @@
  *
  */
 
-import React, { FC } from 'react';
+import React, { FC, ReactElement } from 'react';
 
 export interface InputProps {
   onChange: Function;
@@ -15,7 +15,7 @@ export interface InputProps {
   disabled?: boolean;
 }
 
-const Input: FC<InputProps> = (props: InputProps) => {
+const Primary: FC<InputProps> = (props: InputProps): ReactElement => {
   const { label, type = 'text', placeholder, onChange, value, required = false, disabled = false, position } = props;
 
   return (
@@ -36,4 +36,4 @@ const Input: FC<InputProps> = (props: InputProps) => {
   );
 };
 
-export default Input;
+export default Primary;

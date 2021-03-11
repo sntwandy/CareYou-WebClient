@@ -16,9 +16,9 @@ const Menu: FC = (): ReactElement => {
 
   useEffect(() => {
     if (menuIsOpen) {
-      setMenuOpenStyle('transform opacity-100 scale-100 transition ease-out duration-100 translate-x-4')
+      setMenuOpenStyle('transform opacity-100 scale-100 transition ease-out duration-100 translate-x-4 visible')
     } else {
-      setMenuOpenStyle('transition ease-in duration-75 transform opacity-0 scale-95')
+      setMenuOpenStyle('transition ease-in duration-75 transform opacity-0 scale-95 invisible')
     }
   }, [menuIsOpen]);
 
@@ -41,12 +41,12 @@ const Menu: FC = (): ReactElement => {
           <span className={'mt-4'}>Zeus Amenadiel</span>
         </div>
         <div className="py-1 w-full flex items-start justify-start pt-4 pb-4">
-          <img className={'w-menuIcon ml-2 mr-1'} src="https://i.imgur.com/I7j7gYQ.png" alt="Home icon"/>
+          <img className={'w-menuIcon ml-4 mr-1'} src="https://i.imgur.com/I7j7gYQ.png" alt="Home icon"/>
           <Link href={'/Home'}>Home</Link>
         </div>
         <div className="py-1 w-full flex items-start justify-start pt-4 pb-4 flex-col">
           <div className={'flex items-center justify-start'}>
-            <img className={'w-menuIcon ml-2 mr-1'} src={'https://i.imgur.com/khkvbwh.png'} alt={'Home icon'}/>
+            <img className={'w-menuIcon ml-4 mr-1'} src={'https://i.imgur.com/khkvbwh.png'} alt={'Home icon'}/>
             <Link href={'/'}>Appointment</Link>
           </div>
           <div className={'flex items-center justify-start mt-4'}>
@@ -56,11 +56,11 @@ const Menu: FC = (): ReactElement => {
         </div>
         <div className="py-1 w-full flex items-start justify-start pt-4 pb-4 flex-col">
           <div className={'flex items-center justify-start'}>
-            <img className={'w-menuIcon ml-2 mr-1'} src={'https://i.imgur.com/XtDqCeA.png'} alt={'Home icon'}/>
+            <img className={'w-menuIcon ml-4 mr-1'} src={'https://i.imgur.com/XtDqCeA.png'} alt={'Home icon'}/>
             <Link href={'/'}>Settings</Link>
           </div>
           <div className={'flex items-center justify-start mt-4'}>
-            <img className={'w-menuIcon ml-2 mr-1'} src={'https://i.imgur.com/htDTXgq.png'} alt={'Home icon'}/>
+            <img className={'w-menuIcon ml-4 mr-1'} src={'https://i.imgur.com/htDTXgq.png'} alt={'Home icon'}/>
             <Link href={'/Login'}>Logout</Link>
           </div>
         </div>

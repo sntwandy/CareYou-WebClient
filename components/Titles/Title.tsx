@@ -2,16 +2,19 @@
  *
  */
 
-import React, { ReactElement } from 'react';
+import React, { FC, ReactElement } from 'react';
 
 interface IProps {
   title: string;
+  fontWeight?: string;
+  fontSize?: string;
+  marginTop?: string;
 };
 
-const Title = (props: IProps): ReactElement => {
-  const { title } = props;
+const Title: FC<IProps> = (props: IProps): ReactElement => {
+  const { title, fontWeight = 'font-medium', fontSize = 'text-2xl', marginTop = 'mt-20'} = props;
   return (
-    <h1 className={'w-title h-title text-2xl font-medium flex items-center justify-center'}>{title}</h1>
+    <h1 className={`w-title h-title flex items-center justify-center ${marginTop} ${fontWeight} ${fontSize}`}>{title}</h1>
   )
 };
 

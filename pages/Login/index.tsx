@@ -34,7 +34,7 @@ const Login: FC = (): ReactElement => {
         <img className={'w-full'} src={'https://i.imgur.com/N9aSUrx.png'} alt={'Login img'} />
       </figure>
       <div className={'mb-6'}>
-        <Title title={'Login'} />
+        <Title title={'Login'} marginTop={'mt-2'} />
       </div>
       <div className={'flex items-center justify-center flex-col'}>
         <div className={'flex items-center justify-center flex-col mb-3.5'}>
