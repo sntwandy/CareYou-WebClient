@@ -3,19 +3,11 @@
  */
 
 import React, { FC, ReactElement } from 'react';
+import { IInputs } from '../../utils/interfaces';
 
-export interface InputProps {
-  onChange: Function;
-  value: any;
-  type?: string;
-  placeholder?: string;
-  position?: string;
-  label: string;
-  required?: boolean;
-  disabled?: boolean;
-}
+const Primary: FC<IInputs> = (props: IInputs): ReactElement => {
 
-const Primary: FC<InputProps> = (props: InputProps): ReactElement => {
+  /* Initializations */
   const { label, type = 'text', placeholder, onChange, value, required = false, disabled = false, position } = props;
 
   return (

@@ -3,23 +3,11 @@
  */
 
 import React, { FC } from 'react';
+import { IRadioGroup } from '../../utils/interfaces';
 
-interface IOption {
-  text?: string;
-  value: any
-}
+const RadioGroup: FC<IRadioGroup> = (props: IRadioGroup) => {
 
-interface IProps {
-  onChange: Function;
-  value: any;
-  name: string;
-  options: Array<IOption>;
-  position?: string;
-  label: string;
-  disabled?: boolean;
-}
-
-const RadioGroup: FC<IProps> = (props: IProps) => {
+  /* Initializations */
   const { label, onChange, value, disabled = false, position, options, name } = props;
 
   return (

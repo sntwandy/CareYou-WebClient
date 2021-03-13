@@ -2,12 +2,11 @@
  *
  */
 import { useState, ChangeEvent } from 'react';
-
-// Interface
 import { useInputInterface } from '../../utils/interfaces';
 
-// Custom Hook
 const useInput = (initialValue: any): useInputInterface => {
+
+  /* Local State */
   const [value, setValue] = useState(initialValue);
 
   return {

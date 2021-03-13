@@ -4,23 +4,20 @@
 
 import React, { FC, ReactElement, useState } from 'react';
 import Link from 'next/link';
-
-// Hooks
 import useInput from '../../hooks/useInput';
-
-// Components
 import Input from '../../components/Inputs/PrimaryInput';
 import Button from '../../components/Buttons/PrimaryButton';
 import Title from '../../components/Titles/Title';
 
-// SingUp
 const SingUp: FC = (): ReactElement => {
 
-  // Form steps and progress
+  /* Initializations */
   const progress: string[]= ['0%', '33%', '66%', '90%', '100%'];
+
+  /* Local State */
   const [step, setStep] = useState(1);
 
-  // User data to login, useInput hook
+  /* Custom Hook, useInput */
   const { value: firstName, bind: bindFirst } = useInput('');
   const { value: lastName, bind: bindLast } = useInput('');
   const { value: birthDate, bind: bindBirthDate } = useInput('');
@@ -35,7 +32,7 @@ const SingUp: FC = (): ReactElement => {
   const { value: email, bind: bindEmail } = useInput('');
   const { value: password, bind: bindPassword } = useInput('');
 
-  // Handling submit button
+  /* Functions */
   const handleSubmit = (): void => {
     console.log({
       firstName,

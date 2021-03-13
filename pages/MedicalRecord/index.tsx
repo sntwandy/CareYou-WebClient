@@ -3,20 +3,16 @@
  */
 
 import React, { FC, ReactElement, useState } from 'react';
-import Link from 'next/link';
-
-// Hooks
-import useInput from '../../hooks/useInput';
-
-// Components
 import RadioGroup from '../../components/Inputs/RadioGroup';
 import Input from '../../components/Inputs/PrimaryInput';
 import RecordCard, { IRecord } from '../../components/UI/RecordCard';
 import Title from '../../components/Titles/Title';
 import Menu from '../../components/Menu';
+import useInput from '../../hooks/useInput';
 
-// MedicalRecord
 const MedicalRecord: FC = (): ReactElement => {
+
+  /* Initializations */
   const { value: findFaster, bind: bindFindFaster } = useInput(true);
   const { bind: bindDateType } = useInput('recent');
   const { bind: bindDate } = useInput('');

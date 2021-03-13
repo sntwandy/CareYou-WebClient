@@ -5,15 +5,13 @@
 import React ,{ FC, ReactElement, useEffect, useState } from 'react';
 import Link from 'next/link';
 
-// Menu
 const Menu: FC = (): ReactElement => {
 
-  // If menu is Open or Closed state
+  /* Local State */
   const [menuIsOpen, setMenuIsOpen] = useState(false);
-
-  // If menu is Open or Closed styles
   const [menuOpenStyle, setMenuOpenStyle] = useState('transition ease-in duration-75 transform opacity-0 scale-95 translate-x-0');
 
+  /* Component Update */
   useEffect(() => {
     if (menuIsOpen) {
       setMenuOpenStyle('transform opacity-100 scale-100 transition ease-out duration-100 translate-x-4 visible')

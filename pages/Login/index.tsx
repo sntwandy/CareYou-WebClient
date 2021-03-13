@@ -4,23 +4,18 @@
 
 import React, { FC, ReactElement } from 'react';
 import Link from 'next/link';
-
-// Hooks
 import useInput from '../../hooks/useInput';
-
-// Components
 import Title from '../../components/Titles/Title';
 import Input from '../../components/Inputs/PrimaryInput';
 import Button from '../../components/Buttons/PrimaryButton';
 
-// Login
 const Login: FC = (): ReactElement => {
 
-  // User data login, useInput hook
+  /* Initializations */
   const { value: userName, bind: bindUserName } = useInput('');
   const { value: userPassword, bind: bindUserPassword } = useInput('');
 
-  // Handling submit button
+  /* Functions */
   const handleSubmit = () => {
     console.log({
       userName,

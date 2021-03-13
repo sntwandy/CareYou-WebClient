@@ -4,18 +4,9 @@
 
 import React, { ReactElement } from 'react';
 import format from 'date-fns/format';
+import { IRecordCardProps } from '../../utils/interfaces';
 
-export interface IRecord {
-  date: Date;
-  attendant: String;
-  case: String;
-}
-
-interface IProps {
-  record: IRecord;
-};
-
-const RecordCard = (props: IProps): ReactElement => {
+const RecordCard = (props: IRecordCardProps): ReactElement => {
   const { record } = props;
   return (
     <div className={'flex flex-wrap items-center justify-center bg-black text-white font-light text-sm rounded-tl-input rounded-br-input p-3'} style={{color: '#fff'}}>

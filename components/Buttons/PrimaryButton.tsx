@@ -3,17 +3,11 @@
  */
 
 import React, { FC, ReactElement } from 'react';
+import { IButtons } from '../../utils/interfaces';
 
-interface IProps {
-  onClick: Function;
-  label: string;
-  disabled?: boolean;
-  inverted?: boolean;
-  middle?: boolean;
-  full?: boolean;
-}
+const input: FC<IButtons> = (props: IButtons): ReactElement => {
 
-const input: FC<IProps> = (props: IProps):ReactElement => {
+  /* Initializations */
   const colorClasses = () => (inverted ? 'bg-secondary text-primary hover:text-secondaryButtonHover border-button border-primary' : 'bg-primary text-secondary hover:text-primaryButtonHover');
   const { label, onClick, disabled = false, inverted = false, middle = false, full = false} = props;
 

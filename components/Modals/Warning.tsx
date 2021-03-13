@@ -3,20 +3,18 @@
  */
 
 import React, { FC, ReactElement, useEffect, useState } from 'react';
+import { IWarningModal } from '../../utils/interfaces';
 
-interface IProps {
-  warningModal: boolean;
-  setWarningModal: (value: boolean) => void;
-  message: string;
-}
+const WarningToConfirm: FC<IWarningModal> = (props: IWarningModal): ReactElement => {
 
-const WarningToConfirm: FC<IProps> = (props: IProps): ReactElement => {
+  /* Destructuring Props */
   const { warningModal, setWarningModal, message } = props;
 
-  // If menu is Open or Closed styles
+  /* Local State */
   const [backgroundStyle, setBackgroundStyle] = useState('ease-in duration-200 opacity-0 invisible');
   const [modalStyle, setModalStyle] = useState('ease-in duration-200 opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95 invisible');
 
+  /* Component Update */
   useEffect(() => {
     if (warningModal) {
       setBackgroundStyle('ease-out duration-300 opacity-100 visible');
