@@ -10,6 +10,7 @@ import Title from '../../components/Titles/Title';
 import WarningToConfirmModal from '../../components/Modals/WarningToConfirm';
 import WarningModal from '../../components/Modals/Warning';
 import Button from '../../components/Buttons/PrimaryButton';
+import { useRouter } from 'next/router';
 
 // Search interface type
 interface ISearch {
@@ -27,6 +28,7 @@ const Home: FC = (): ReactElement => {
     { id: 3, name: 'Eye pain' },
     { id: 4, name: 'Sneezing' },
   ]
+  const router = useRouter()
 
   // Init states
   const filteredInitState: ISearch[] = [];
@@ -39,6 +41,7 @@ const Home: FC = (): ReactElement => {
   const [symptoms, setSymptoms] = useState(symptomsInitState);
   const [warningModalToConfirm, setWarningModalToConfirm] = useState(false);
   const [warningModal, setWarningModal] = useState(false);
+  const [isLogged, setIsLogged] = useState(false);
 
   // Handle input search [filter]
   const handleInputSearch = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -94,8 +97,19 @@ const Home: FC = (): ReactElement => {
     setToDeleteSymptomConfirm(false);
   }, [toDeleteSymptomConfirm]);
 
+  useEffect(() => {
+    const is = localStorage.getItem('Data')
+    is !== null ? setIsLogged(true) : setIsLogged(false)
+  }, [])
+
+  useEffect(() => {
+    !isLogged && router.push('/Login')
+  }, [isLogged])
+
   return (
-    <div className={'w-full h-full'}>
+    <>
+    {isLogged && (
+      <div className={'w-full h-full'}>
       {/* Menu */}
       <Menu />
       {/* Title */}
@@ -173,6 +187,8 @@ const Home: FC = (): ReactElement => {
       </div>
       {/* <button>Add</button> */}
     </div>
+    )}
+    </>
   )
 };
 
