@@ -15,7 +15,11 @@ const Auth = (props: any) => {
   /* Component Update */
   useEffect(() => {
     const token = localStorage.getItem('Token')
-    !token && router.push('/Login')
+    if (token) {
+      !JWT(token) && router.push('/Login')
+    } else {
+      router.push('/Login')
+    }
   }, [])
 
   return (
