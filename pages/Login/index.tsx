@@ -8,19 +8,30 @@ import useInput from '../../hooks/useInput';
 import Title from '../../components/Titles/Title';
 import Input from '../../components/Inputs/PrimaryInput';
 import Button from '../../components/Buttons/PrimaryButton';
+import axios, { AxiosResponse } from 'axios';
+import useRouter from 'next/router';
 
 const Login: FC = (): ReactElement => {
 
   /* Initializations */
+  const router = useRouter;
   const { value: userName, bind: bindUserName } = useInput('');
-  const { value: userPassword, bind: bindUserPassword } = useInput('');
+  const { value: password, bind: bindUserPassword } = useInput('');
 
   /* Functions */
-  const handleSubmit = () => {
-    console.log({
-      userName,
-      userPassword,
-    });
+  const handleSubmit = async () => {
+    try {
+      const response: AxiosResponse = await axios.post('http://localhost:3000/login', {
+        "user": {
+          "userName": userName,
+          "password": password
+        }
+      });
+      response.status === 200 && localStorage.setItem('Token', response.data.body.accessToken)
+      router.push('/Home')
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   return (

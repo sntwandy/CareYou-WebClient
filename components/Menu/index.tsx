@@ -48,7 +48,7 @@ const Menu: FC = (): ReactElement => {
             <Link href={'/'}>Appointment</Link>
           </div>
           <div className={'flex items-center justify-start mt-4'}>
-            <img className={'w-menuIcon ml-2 mr-1'} src={'https://i.imgur.com/2KZ4j6y.png'} alt={'Home icon'}/>
+            <img className={'w-menuIcon ml-4 mr-1'} src={'https://i.imgur.com/2KZ4j6y.png'} alt={'Home icon'}/>
             <Link href={'/MedicalRecord'}>Medical Record</Link>
           </div>
         </div>

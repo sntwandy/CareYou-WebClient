@@ -9,6 +9,7 @@ import RecordCard, { IRecord } from '../../components/UI/RecordCard';
 import Title from '../../components/Titles/Title';
 import Menu from '../../components/Menu';
 import useInput from '../../hooks/useInput';
+import Auth from '../../utils/Auth';
 
 const MedicalRecord: FC = (): ReactElement => {
 
@@ -37,27 +38,29 @@ const MedicalRecord: FC = (): ReactElement => {
   }];
 
   return (
-    <div className={'w-full h-full'}>
-      <Menu />
-      <div className={'flex items-center justify-center flex-col mb-9'}>
-        <div className={'mb-6'}>
-          <Title title={'Medical Record'} />
+    <Auth>
+      <div className={'w-full h-full'}>
+        <Menu />
+        <div className={'flex items-center justify-center flex-col mb-9'}>
+          <div className={'mb-6'}>
+            <Title title={'Medical Record'} />
+          </div>
+        </div>
+        <div className={'flex items-center justify-center flex-col'}>
+          <RadioGroup options={boolOptions} {...bindFindFaster} name="yesOrNo" label="Would you like to find it faster?"/>
+          {findFaster && (
+            <div>
+              <RadioGroup options={dateOptions} {...bindDateType} name="dateType" label="Date:"/>
+              <Input {...bindDate} type="date" label="Date"/>
+              <Input {...bindDate} type="select" label="Result:"/>
+            </div>
+          )}
+        </div>
+        <div className={'flex items-center justify-center flex-col'}>
+          {records.map((record, index) => <RecordCard key={index} record={record} />)}
         </div>
       </div>
-      <div className={'flex items-center justify-center flex-col'}>
-        <RadioGroup options={boolOptions} {...bindFindFaster} name="yesOrNo" label="Would you like to find it faster?"/>
-        {findFaster && (
-          <div>
-            <RadioGroup options={dateOptions} {...bindDateType} name="dateType" label="Date:"/>
-            <Input {...bindDate} type="date" label="Date"/>
-            <Input {...bindDate} type="select" label="Result:"/>
-          </div>
-        )}
-      </div>
-      <div className={'flex items-center justify-center flex-col'}>
-        {records.map((record, index) => <RecordCard key={index} record={record} />)}
-      </div>
-    </div>
+    </Auth>
   );
 };
 

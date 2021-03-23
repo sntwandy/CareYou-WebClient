@@ -11,7 +11,6 @@ const Auth = (props: any) => {
   /* Initializations */
   const router = useRouter();
 
-
   /* Component Update */
   useEffect(() => {
     const token = localStorage.getItem('Token')

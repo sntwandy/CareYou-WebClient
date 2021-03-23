@@ -8,8 +8,7 @@ const SECRET_KEY = process.env.SECRET_KEY;
 
 const verifyToken = (token: string): boolean => {
   let isVerfied: boolean = false;
-    const bearerToken: string = token?.split(' ')[1];
-
+    const bearerToken = token?.split(' ')[1];
     SECRET_KEY &&
       jwt.verify(bearerToken, SECRET_KEY, (err, authData) => {
         console.log(err)
