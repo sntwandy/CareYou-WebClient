@@ -8,6 +8,7 @@ import useInput from '../../hooks/useInput';
 import Input from '../../components/Inputs/PrimaryInput';
 import Button from '../../components/Buttons/PrimaryButton';
 import Title from '../../components/Titles/Title';
+import axios, { AxiosResponse } from 'axios';
 
 const SingUp: FC = (): ReactElement => {
 
@@ -33,22 +34,21 @@ const SingUp: FC = (): ReactElement => {
   const { value: password, bind: bindPassword } = useInput('');
 
   /* Functions */
-  const handleSubmit = (): void => {
-    console.log({
-      firstName,
-      lastName,
-      birthDate,
-      gender,
-      country,
-      province,
-      postalCode,
-      addressLine,
-      suffering,
-      idCard,
-      userName,
-      email,
-      password,
-    });
+  const handleSubmit = async () => {
+    const response: AxiosResponse = await axios.post('http://localhost:3000/users', {
+      'name': firstName,
+      'lastName': lastName,
+      'userName': userName,
+      'email': email,
+      'password': password,
+      'birthDate': birthDate,
+      'idCard': idCard,
+      'suffering': suffering,
+      'country': country,
+      'province': province,
+      'postalCode': postalCode
+    })
+    console.log(response);
   };
 
   return (
