@@ -9,6 +9,7 @@ import WarningToConfirmModal from '../../components/Modals/WarningToConfirm';
 import WarningModal from '../../components/Modals/Warning';
 import Button from '../../components/Buttons/PrimaryButton';
 import Auth from '../../utils/Auth';
+import axios from 'axios';
 import { ISearch } from '../../utils/interfaces';
 
 const Home: FC = (): ReactElement => {
@@ -68,8 +69,9 @@ const Home: FC = (): ReactElement => {
     }));
   };
 
-  const startTest = () => {
-    console.table(symptoms);
+  const startTest = async () => {
+    const response = await axios.get('')
+    console.log(symptoms);
   };
 
   const newTest = () => {
