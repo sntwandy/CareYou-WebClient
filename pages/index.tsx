@@ -5,7 +5,6 @@
 import Link from 'next/link';
 import React, { FC, ReactElement } from 'react';
 
-// Index page
 const Index: FC = (): ReactElement => {
   return (
     <>

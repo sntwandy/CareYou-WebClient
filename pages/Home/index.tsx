@@ -9,10 +9,13 @@ import WarningToConfirmModal from '../../components/Modals/WarningToConfirm';
 import WarningModal from '../../components/Modals/Warning';
 import Button from '../../components/Buttons/PrimaryButton';
 import Auth from '../../utils/Auth';
-import axios from 'axios';
-import { ISearch } from '../../utils/interfaces';
+import axios, { AxiosResponse } from 'axios';
+import { ISearch, IUser } from '../../utils/interfaces';
+
 
 const Home: FC = (): ReactElement => {
+  /* ENV VARIABLES */
+  const BACKEND_URL = process.env.BACKEND_URL;
 
   /* Mock Data */
   const data: ISearch[] = [
@@ -25,8 +28,23 @@ const Home: FC = (): ReactElement => {
   /* Initializations */
   const filteredInitState: ISearch[] = [];
   const symptomsInitState: string[] = [];
+  const UserInitState: IUser = {
+    birthDate: '',
+    country: '',
+    email: '',
+    idCard: '',
+    lastName: '',
+    name: '',
+    password: '',
+    postalCode: '',
+    province: '',
+    suffering: '',
+    userName: '',
+  };
 
   /* Local State */
+  const [token, setToken] = useState(String);
+  const [userInfo, setUserInfo] = useState(UserInitState);
   const [toDeleteSymptom, setToDeleteSymptom] = useState('');
   const [toDeleteSymptomConfirm, setToDeleteSymptomConfirm] = useState(false);
   const [filteredSymptoms, setFilteredSymptoms] = useState(filteredInitState);
@@ -70,8 +88,18 @@ const Home: FC = (): ReactElement => {
   };
 
   const startTest = async () => {
-    const response = await axios.get('')
-    console.log(symptoms);
+    const token = localStorage.getItem('Token');
+    const response: AxiosResponse = await axios.post(`${BACKEND_URL}/diagnosis`, {
+      "symptoms": symptoms
+    },
+    {
+      headers: {
+        'Authorization': token
+      }
+    }
+    )
+
+    console.log(response);
   };
 
   const newTest = () => {
@@ -79,18 +107,40 @@ const Home: FC = (): ReactElement => {
     setFilteredSymptoms([]);
   };
 
+  const getUserInfo = async () => {
+    const response: AxiosResponse = await axios.post(`${BACKEND_URL}/users/info`,{
+        token
+      },
+      {
+        headers: {
+          'Authorization': token
+        }
+      }
+    )
+    setUserInfo(response.data.body);
+  }
+
   /* Component Update */
   useEffect(() => {
     toDeleteSymptomConfirm && deleteSymptom(toDeleteSymptom);
     setToDeleteSymptomConfirm(false);
   }, [toDeleteSymptomConfirm]);
 
+  useEffect(() => {
+    const token = localStorage.getItem('Token');
+    token && setToken(token);
+  }, []);
+
+  useEffect(() => {
+      token && getUserInfo();
+  }, [token])
+
   return (
     <>
       <Auth>
         <div className={'w-full h-full'}>
           {/* Menu */}
-          <Menu />
+          <Menu name={userInfo.name} lastName={userInfo.lastName} />
           {/* Title */}
           <div className={'flex items-center justify-center flex-col'}>
             <Title title={'Good Morning,'} fontSize={'text-lg'} fontWeight={'font-light'} />

@@ -82,3 +82,17 @@ export interface IRecordCard {
 export interface IRecordCardProps {
   record: IRecordCard;
 };
+
+export interface IUser {
+  birthDate: string;
+  country: string;
+  email: string;
+  idCard: string;
+  lastName: string;
+  name: string;
+  password: string;
+  postalCode: string;
+  province: string;
+  suffering: string;
+  userName: string;
+}
