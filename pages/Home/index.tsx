@@ -98,7 +98,6 @@ const Home: FC = (): ReactElement => {
       }
     }
     )
-
     console.log(response);
   };
 
