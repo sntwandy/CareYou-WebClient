@@ -35,12 +35,10 @@ const Login: FC = (): ReactElement => {
         }
       });
       response.status === 200 && localStorage.setItem('Token', response.data.body.accessToken)
-      console.log(localStorage.getItem('Token'))
       router.push('/Home')
     } catch (error) {
       setOnError(true);
       setWarningModal(true);
-      console.log(error)
     }
   };
 

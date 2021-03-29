@@ -78,18 +78,18 @@ const SingUp: FC = (): ReactElement => {
       <div className={'flex items-center justify-center flex-col'}>
         {step === 1 && (
           <div>
-            <Input label={'First Name'} placeholder={'Zeus'} {...bindFirst} required />
-            <Input label={'Last Name'} placeholder={'Amenadiel'} {...bindLast} required />
-            <Input label={'Birth Date'} placeholder={'17-09-1995'} {...bindBirthDate} type={'date'} required />
-            <Input label={'Gender'} placeholder={'Gender'} {...bindGender} required />
+            <Input label={'First Name'} placeholder={'Zeus'} onError={firstName == '' ? true : false} {...bindFirst} required />
+            <Input label={'Last Name'} placeholder={'Amenadiel'} onError={lastName == '' ? true : false} {...bindLast} required />
+            <Input label={'Birth Date'} placeholder={'17-09-1995'} onError={birthDate == '' ? true : false} {...bindBirthDate} type={'date'} required />
+            <Input label={'Gender'} placeholder={'Gender'} onError={gender == '' ? true : false} {...bindGender} required />
           </div>
         )}
         {step === 2 && (
           <div>
-            <Input label="Country" placeholder="Dominican Republic" {...bindCountry} required />
-            <Input label="Province" placeholder="Santo Domingo" {...bindProvince} required />
-            <Input label="Postal Code" placeholder="41000" {...bindPostalCode} required />
-            <Input label="Address Lines" placeholder="Autopista Duarte, #17" {...bindAddressLine} required />
+            <Input label="Country" placeholder="Dominican Republic" onError={country == '' ? true : false} {...bindCountry} required />
+            <Input label="Province" placeholder="Santo Domingo" onError={country == '' ? true : false} {...bindProvince} required />
+            <Input label="Postal Code" placeholder="41000" {...bindPostalCode} />
+            <Input label="Address Lines" placeholder="Autopista Duarte, #17"  onError={addressLine == '' ? true : false} {...bindAddressLine} required />
           </div>
         )}
         {step === 3 && (
@@ -106,10 +106,10 @@ const SingUp: FC = (): ReactElement => {
         )}
         {step === 4 && (
           <div>
-            <Input label="ID Card" placeholder="402-2392919-1" {...bindIdCard} required />
-            <Input label="User Name" placeholder="zeus_amen" {...bindUserName} required />
-            <Input label="Email" placeholder="zamenadiel@email.com" {...bindEmail} required />
-            <Input label="Password" placeholder="sec2re-pass4rd" {...bindPassword} type="password" required />
+            <Input label="ID Card" placeholder="402-2392919-1" onError={idCard == '' ? true : false} {...bindIdCard} required />
+            <Input label="User Name" placeholder="zeus_amen" onError={userName == '' ? true : false} {...bindUserName} required />
+            <Input label="Email" placeholder="zamenadiel@email.com" onError={email == '' ? true : false} {...bindEmail} required />
+            <Input label="Password" placeholder="sec2re-pass4rd" onError={password == '' ? true : false} {...bindPassword} type="password" required />
           </div>
         )}
         {step === 5 && (

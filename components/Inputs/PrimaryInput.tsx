@@ -8,8 +8,9 @@ import { IInputs } from '../../utils/interfaces';
 const Primary: FC<IInputs> = (props: IInputs): ReactElement => {
 
   /* Initializations */
-  const { label, type = 'text', placeholder, onChange, value, required = false, disabled = false, position, onError = false } = props;
-  const error = 'border-2 border-red-600'
+  const { label, type = 'text', placeholder, onChange, value, required = false, disabled = false, position, onError = false, onValidation = false } = props;
+  const error = 'border-2 border-red-600';
+  const validation = 'border-2 border-green-600'
 
   return (
     <div className={'flex items-center justify-center flex-col mb-3.5'}>
@@ -17,7 +18,7 @@ const Primary: FC<IInputs> = (props: IInputs): ReactElement => {
         {label}
       </label>
       <input
-        className={`w-primaryInput h-primaryInput text-lg text-center rounded-tl-input rounded-br-input outline-none bg-tertiary ${onError ? error : 'focus:ring-2 focus:ring-black'} ${position}`}
+        className={`w-primaryInput h-primaryInput text-lg text-center rounded-tl-input rounded-br-input outline-none bg-tertiary ${onError ? error : onValidation ? validation : 'focus:ring-2 focus:ring-black'} ${position}`}
         type={type}
         placeholder={placeholder}
         value={value}

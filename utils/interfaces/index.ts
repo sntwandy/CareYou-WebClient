@@ -37,6 +37,7 @@ export interface IInputs {
   required?: boolean;
   disabled?: boolean;
   onError?: boolean;
+  onValidation?: boolean;
 };
 
 export interface IOption {
