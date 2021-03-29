@@ -12,10 +12,11 @@ import Auth from '../../utils/Auth';
 import axios, { AxiosResponse } from 'axios';
 import { ISearch, IUser } from '../../utils/interfaces';
 
+/* ENV VARIABLES */
+const DIAGNOSIS_URL = process.env.DIAGNOSIS_URL;
+const GET_USER_URL = process.env.GET_USER_URL;
 
 const Home: FC = (): ReactElement => {
-  /* ENV VARIABLES */
-  const BACKEND_URL = process.env.BACKEND_URL;
 
   /* Mock Data */
   const data: ISearch[] = [
@@ -89,7 +90,7 @@ const Home: FC = (): ReactElement => {
 
   const startTest = async () => {
     const token = localStorage.getItem('Token');
-    const response: AxiosResponse = await axios.post(`${BACKEND_URL}/diagnosis`, {
+    const response: AxiosResponse = await axios.post(`${DIAGNOSIS_URL}`, {
       "symptoms": symptoms
     },
     {
@@ -107,7 +108,7 @@ const Home: FC = (): ReactElement => {
   };
 
   const getUserInfo = async () => {
-    const response: AxiosResponse = await axios.post(`${BACKEND_URL}/users/info`,{
+    const response: AxiosResponse = await axios.post(`${GET_USER_URL}`,{
         token
       },
       {

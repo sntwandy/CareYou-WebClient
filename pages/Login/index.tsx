@@ -12,6 +12,9 @@ import axios, { AxiosResponse } from 'axios';
 import useRouter from 'next/router';
 import Modal from '../../components/Modals/Warning';
 
+/* Env Variables */
+const LOGIN_USERS_URL = process.env.LOGIN_USERS_URL;
+
 const Login: FC = (): ReactElement => {
 
   /* Initializations */
@@ -28,7 +31,7 @@ const Login: FC = (): ReactElement => {
       ? setMessage('Apparently you have forgotten to fill in a field, please verify it.')
       : setMessage('Your credentials are incorrect, try again!! 😕')
     try {
-      const response: AxiosResponse = await axios.post('http://localhost:3000/login', {
+      const response: AxiosResponse = await axios.post(`${LOGIN_USERS_URL}`, {
         "user": {
           "userName": userName,
           "password": password

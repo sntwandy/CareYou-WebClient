@@ -10,6 +10,9 @@ import Button from '../../components/Buttons/PrimaryButton';
 import Title from '../../components/Titles/Title';
 import axios, { AxiosResponse } from 'axios';
 
+/* Env Variables */
+const SINGUP_USERS_URL = process.env.SINGUP_USERS_URL;
+
 const SingUp: FC = (): ReactElement => {
 
   /* Initializations */
@@ -35,7 +38,7 @@ const SingUp: FC = (): ReactElement => {
 
   /* Functions */
   const handleSubmit = async () => {
-    const response: AxiosResponse = await axios.post('http://localhost:3000/users', {
+    const response: AxiosResponse = await axios.post(`${SINGUP_USERS_URL}`, {
       'name': firstName,
       'lastName': lastName,
       'userName': userName,
