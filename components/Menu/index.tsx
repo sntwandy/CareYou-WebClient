@@ -6,9 +6,6 @@ import React ,{ FC, ReactElement, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-/* Environments variables */
-const BACKEND_URL = process.env.BACKEND_URL;
-
 interface IProps {
   name: string;
   lastName: string;

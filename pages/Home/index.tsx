@@ -7,10 +7,11 @@ import Menu from '../../components/Menu';
 import Title from '../../components/Titles/Title';
 import WarningToConfirmModal from '../../components/Modals/WarningToConfirm';
 import WarningModal from '../../components/Modals/Warning';
+import DiagnosisModal from '../../components/Modals/DiagnosisResults';
 import Button from '../../components/Buttons/PrimaryButton';
 import Auth from '../../utils/Auth';
 import axios, { AxiosResponse } from 'axios';
-import { ISearch, IUser } from '../../utils/interfaces';
+import { ISearch, IUser, IDiagnosisResults } from '../../utils/interfaces';
 
 /* ENV VARIABLES */
 const DIAGNOSIS_URL = process.env.DIAGNOSIS_URL;
@@ -29,6 +30,7 @@ const Home: FC = (): ReactElement => {
   /* Initializations */
   const filteredInitState: ISearch[] = [];
   const symptomsInitState: string[] = [];
+  const diagnosisResultsInitState: IDiagnosisResults[] = [];
   const UserInitState: IUser = {
     birthDate: '',
     country: '',
@@ -52,6 +54,8 @@ const Home: FC = (): ReactElement => {
   const [symptoms, setSymptoms] = useState(symptomsInitState);
   const [warningModalToConfirm, setWarningModalToConfirm] = useState(false);
   const [warningModal, setWarningModal] = useState(false);
+  const [diagnosisModal, setDiagnosisModal] = useState(false);
+  const [diagnosisResults, setDiagnosisResults] = useState(diagnosisResultsInitState);
 
   /* Functions */
   const handleInputSearch = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -90,16 +94,21 @@ const Home: FC = (): ReactElement => {
 
   const startTest = async () => {
     const token = localStorage.getItem('Token');
-    const response: AxiosResponse = await axios.post(`${DIAGNOSIS_URL}`, {
-      "symptoms": symptoms
-    },
-    {
-      headers: {
-        'Authorization': token
+    try {
+      const response: AxiosResponse = await axios.post(`${DIAGNOSIS_URL}`, {
+        "symptoms": symptoms
+      },
+      {
+        headers: {
+          'Authorization': token
+        }
       }
+      )
+      setDiagnosisResults(response.data.body);
+      setDiagnosisModal(true);
+    } catch (error) {
+      console.log(error)
     }
-    )
-    console.log(response);
   };
 
   const newTest = () => {
@@ -143,7 +152,7 @@ const Home: FC = (): ReactElement => {
           <Menu name={userInfo.name} lastName={userInfo.lastName} />
           {/* Title */}
           <div className={'flex items-center justify-center flex-col'}>
-            <Title title={'Good Morning,'} fontSize={'text-lg'} fontWeight={'font-light'} />
+            <Title title={'Good Morning'} fontSize={'text-lg'} fontWeight={'font-light'} userName={userInfo.name + " " + userInfo.lastName} />
             <Title title={'Welcome to CareYou'} fontSize={'text-lg'} marginTop={'mt-2'} fontWeight={'font-light'} />
           </div>
           {/* Inputs */}
@@ -212,6 +221,13 @@ const Home: FC = (): ReactElement => {
               warningModal={warningModal}
               setWarningModal={setWarningModal}
               message={`You have already selected that symptom`}
+            />
+          </div>
+          <div className={diagnosisModal ? 'visible': 'invisible'}>
+            <DiagnosisModal
+              diagnosisModal={diagnosisModal}
+              setDiagnosisModal={setDiagnosisModal}
+              diagnosisResults={diagnosisResults}
             />
           </div>
           {/* <button>Add</button> */}

@@ -68,11 +68,18 @@ export interface IWarningnModalToConfirm {
   setToDeleteSymptomConfirm: (value: boolean) => void;
 };
 
+export interface IDiagnosisModal {
+  diagnosisModal: boolean;
+  setDiagnosisModal: (value: boolean) => void;
+  diagnosisResults: []
+};
+
 export interface ITitle {
   title: string;
   fontWeight?: string;
   fontSize?: string;
   marginTop?: string;
+  userName?: string;
 };
 
 export interface IRecordCard {
@@ -97,4 +104,10 @@ export interface IUser {
   province: string;
   suffering: string;
   userName: string;
-}
+};
+
+export interface IDiagnosisResults {
+  disease: string;
+  symptoms: number;
+  symptomsMatch: number;
+};
