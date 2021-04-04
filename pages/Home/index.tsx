@@ -12,6 +12,7 @@ import Button from '../../components/Buttons/PrimaryButton';
 import Auth from '../../utils/Auth';
 import axios, { AxiosResponse } from 'axios';
 import { ISearch, IUser, IDiagnosisResults } from '../../utils/interfaces';
+import JWT from '../../utils/jwt';
 
 /* ENV VARIABLES */
 const DIAGNOSIS_URL = process.env.DIAGNOSIS_URL;
@@ -133,15 +134,15 @@ const Home: FC = (): ReactElement => {
   useEffect(() => {
     toDeleteSymptomConfirm && deleteSymptom(toDeleteSymptom);
     setToDeleteSymptomConfirm(false);
-  }, [toDeleteSymptomConfirm]);
+  }, [toDeleteSymptomConfirm])
 
   useEffect(() => {
     const token = localStorage.getItem('Token');
     token && setToken(token);
-  }, []);
+  }, [])
 
   useEffect(() => {
-      token && getUserInfo();
+      token && JWT(token) ? getUserInfo() : null
   }, [token])
 
   return (

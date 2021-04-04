@@ -36,6 +36,8 @@ const DiagnosisResults: FC<IDiagnosisModal> = (props: IDiagnosisModal): ReactEle
 
   console.log(diagnosisR)
 
+  const formu = ''
+
   return (
     <div className={'fixed z-10 inset-0 overflow-y-auto'}>
       <div className={'flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0'}>
@@ -47,26 +49,43 @@ const DiagnosisResults: FC<IDiagnosisModal> = (props: IDiagnosisModal): ReactEle
         <span className={'hidden sm:inline-block sm:align-middle sm:h-screen'} aria-hidden={'true'}>&#8203;</span>
         <div className={`${modalStyle} inline-block align-bottom bg-secondary rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full`} role={'dialog'} aria-modal="true" aria-labelledby={'modal-headline'}>
           <div className={'bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4'}>
-            <div className={'sm:flex sm:items-start'}>
-              <div className={'mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10'}>
+            <div className={'sm:flex sm:items-start md:items-center md:flex-col'}>
+              <div className={'mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-purple-100 sm:mx-0 sm:h-10 sm:w-10'}>
                 {/* Heroicon name: outline/exclamation */}
-                <svg className={'h-6 w-6 text-red-600'} fill={'none'} viewBox={'0 0 24 24'} stroke={'currentColor'} aria-hidden={'true'}>
-                  <path strokeLinecap={'round'} strokeLinejoin={'round'} strokeWidth={'2'} d={'M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z'} />
-                </svg>
+                <img src={'https://res.cloudinary.com/dh9cghj6y/image/upload/v1617446057/CareYou/Icons/diagnosisResults/m3qzqr354iywb4mxv8nt.webp'} alt={'Diagnosis Results'}/>
               </div>
-              <div className={'mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left'}>
+              <div className={'mt-3 sm:mt-0 sm:ml-4 sm:text-left'}>
                 <div>
                   <h3 className={'text-lg leading-6 font-medium text-gray-900'} id={'modal-headline'}>
                     Diagnosis Results:
                   </h3>
                 </div>
-                <div>
-                  <ul>
-                    {diagnosisR.map((item) => (
-                      <li>{item.disease} : {Math.round((item.symptomsMatch / item.symptoms) * 100)}%</li>
-                    ))}
-                  </ul>
-                </div>
+              </div>
+              <div className={''}>
+                <ul className={'max-h-96 overflow-y-auto'}>
+                  {diagnosisR.map((item) => (
+                    <li className={'w-primaryInput h-diagnosisResults text-lg text-center rounded-tl-input rounded-br-input bg-primary text-secondary mt-2 mb-2 p-3'}>
+                      <div className={'flex items-center justify-between'}>
+                        <div className={'w-1/2 flex items-center justify-start'}>
+                          <h3 className={'text-lg'}>{item.disease}</h3>
+                        </div>
+                        <div className={'w-1/2 relative h-diagnosisResultsPercent bg-primary border-white text-center rounded-button border'}>
+                          <div className={'h-diagnosisResultsPercent2 bg-secondary rounded-diagnosisResultsPercent'} style={{ width: Math.round((item.symptomsMatch / item.symptoms) * 100)}}>
+                            <span className={'w-1/2 absolute h-diagnosisResultsPercent text-base text-secondary'} style={{ left: 'calc(50% - 12px)' }}>
+                              {Math.round((item.symptomsMatch / item.symptoms) * 100)}%
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className={'flex items-center justify-start mt-2'}>
+                        <p className={'text-xs text-left'}>Coronaviruses are a family of viruses that can cause respiratory
+                          illness in humans. They get their name, “corona,” from the many
+                          crown-like spikes on the surface of the virus.
+                        </p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>

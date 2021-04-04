@@ -1,5 +1,14 @@
 module.exports = {
   theme: {
+    borderWidth: {
+      DEFAULT: '1px',
+      '0': '0',
+      '2': '2px',
+      '3': '3px',
+      '4': '4px',
+      '6': '6px',
+      '8': '8px',
+    },
     extend: {
       width: {
         'primaryButton': '12.5rem',
@@ -20,6 +29,9 @@ module.exports = {
       menuButton: '2.688rem',
       menu: '29.125rem',
       selectedSym: '8.625rem',
+      diagnosisResults: '10.063rem',
+      diagnosisResultsPercent: '1.60rem',
+      diagnosisResultsPercent2: '1.50rem',
       full: '100vh',
     },
     backgroundColor: theme => ({
@@ -31,7 +43,7 @@ module.exports = {
     borderRadius: {
       'button': '0.625rem',
       'input': '1.25rem',
-      DEFAULT: '0.25rem',
+      'diagnosisResultsPercent': '0.5rem',
       DEFAULT: '4px',
       'md': '0.375rem',
       'lg': '0.5rem',
