@@ -13,6 +13,7 @@ module.exports = {
       width: {
         'primaryButton': '12.5rem',
         'primaryInput': '16.875rem',
+        'diagnosisResults': '15.875rem',
         'buttonMiddle': '7.313rem',
         'title': '16.875rem',
         'menuButton': '3.313rem',
@@ -29,7 +30,8 @@ module.exports = {
       menuButton: '2.688rem',
       menu: '29.125rem',
       selectedSym: '8.625rem',
-      diagnosisResults: '10.063rem',
+      diagnosisResults: '11.063rem',
+      buttonDiagnosisResults: '2rem',
       diagnosisResultsPercent: '1.60rem',
       diagnosisResultsPercent2: '1.50rem',
       full: '100vh',
@@ -43,7 +45,7 @@ module.exports = {
     borderRadius: {
       'button': '0.625rem',
       'input': '1.25rem',
-      'diagnosisResultsPercent': '0.5rem',
+      'diagnosisResultsPercent': '1.25rem',
       DEFAULT: '4px',
       'md': '0.375rem',
       'lg': '0.5rem',
