@@ -64,35 +64,35 @@ const SingUp: FC = (): ReactElement => {
         <div className={'mb-6'}>
           <Title title={'Sing Up'} marginTop={'mt-2'} />
         </div>
-        <div className={'w-primaryInput h-8 rounded-input bg-secondary'}>
+        <div className={'w-primaryInput h-8 rounded-input border-primary border bg-secondary'}>
           <div className={'h-7 bg-primary rounded-input'} style={{ width: progress[step - 1] }} >
             <span className={`w-primaryInput h-8 flex items-center justify-center text-lg ${step >= 3 ? 'text-secondary' : 'text-black'}`}>{progress[step - 1]}</span>
           </div>
         </div>
-        <div className={'w-60 h-7 bg-primary text-center hidden'}>
+        {/* <div className={'w-60 h-7 bg-primary border-primary border text-center'}>
           <div className={'h-7 bg-secondary'} style={{ width: progress[step - 1] }}>
             <span className={'absolute text-lg'} style={{ left: 'calc(50% - 12px)' }}>
               {progress[step - 1]}
             </span>
           </div>
-        </div>
+        </div> */}
       </div>
       {/* FORM FIELDS */}
       <div className={'flex items-center justify-center flex-col'}>
         {step === 1 && (
           <div>
-            <Input label={'First Name'} placeholder={'Zeus'} onError={firstName == '' ? true : false} {...bindFirst} required />
-            <Input label={'Last Name'} placeholder={'Amenadiel'} onError={lastName == '' ? true : false} {...bindLast} required />
-            <Input label={'Birth Date'} placeholder={'17-09-1995'} onError={birthDate == '' ? true : false} {...bindBirthDate} type={'date'} required />
-            <Input label={'Gender'} placeholder={'Gender'} onError={gender == '' ? true : false} {...bindGender} required />
+            <Input label={'First Name'} placeholder={'Zeus'} {...bindFirst} required />
+            <Input label={'Last Name'} placeholder={'Amenadiel'} {...bindLast} required />
+            <Input label={'Birth Date'} placeholder={'17-09-1995'} {...bindBirthDate} type={'date'} required />
+            <Input label={'Gender'} placeholder={'Gender'} {...bindGender} required />
           </div>
         )}
         {step === 2 && (
           <div>
-            <Input label="Country" placeholder="Dominican Republic" onError={country == '' ? true : false} {...bindCountry} required />
-            <Input label="Province" placeholder="Santo Domingo" onError={country == '' ? true : false} {...bindProvince} required />
+            <Input label="Country" placeholder="Dominican Republic" {...bindCountry} required />
+            <Input label="Province" placeholder="Santo Domingo" {...bindProvince} required />
             <Input label="Postal Code" placeholder="41000" {...bindPostalCode} />
-            <Input label="Address Lines" placeholder="Autopista Duarte, #17"  onError={addressLine == '' ? true : false} {...bindAddressLine} required />
+            <Input label="Address Lines" placeholder="Autopista Duarte, #17" {...bindAddressLine} required />
           </div>
         )}
         {step === 3 && (
@@ -109,10 +109,10 @@ const SingUp: FC = (): ReactElement => {
         )}
         {step === 4 && (
           <div>
-            <Input label="ID Card" placeholder="402-2392919-1" onError={idCard == '' ? true : false} {...bindIdCard} required />
-            <Input label="User Name" placeholder="zeus_amen" onError={userName == '' ? true : false} {...bindUserName} required />
-            <Input label="Email" placeholder="zamenadiel@email.com" onError={email == '' ? true : false} {...bindEmail} required />
-            <Input label="Password" placeholder="sec2re-pass4rd" onError={password == '' ? true : false} {...bindPassword} type="password" required />
+            <Input label="ID Card" placeholder="402-2392919-1" {...bindIdCard} required />
+            <Input label="User Name" placeholder="zeus_amen" {...bindUserName} required />
+            <Input label="Email" placeholder="zamenadiel@email.com" {...bindEmail} required />
+            <Input label="Password" placeholder="sec2re-pass4rd" {...bindPassword} type="password" required />
           </div>
         )}
         {step === 5 && (
