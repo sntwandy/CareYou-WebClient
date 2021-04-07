@@ -61,10 +61,10 @@ const DiagnosisResults: FC<IDiagnosisModal> = (props: IDiagnosisModal): ReactEle
                   </h3>
                 </div>
               </div>
-              <div className={''}>
-                <ul className={'max-h-96 overflow-y-auto'}>
+              <div className={'w-full'}>
+                <ul className={'max-h-96 w-full flex items-center justify-start flex-col overflow-y-auto'}>
                   {diagnosisR.map((item) => (
-                    <li className={'w-diagnosisResults h-diagnosisResults text-lg text-center rounded-tl-input rounded-br-input bg-primary text-secondary mt-2 mb-2 p-3'}>
+                    <li className={'w-full max-w-sm h-diagnosisResults text-lg text-center rounded-tl-input rounded-br-input bg-primary text-secondary mt-2 mb-2 p-3'}>
                       <div className={'flex items-center justify-between'}>
                         <div className={'w-2/5 flex items-center justify-start'}>
                           <h3 className={'text-lg'}>{item.disease}</h3>
