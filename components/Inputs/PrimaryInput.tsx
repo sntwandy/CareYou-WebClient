@@ -9,7 +9,7 @@ export interface InputProps {
   value?: any;
   type?: string;
   placeholder?: string;
-  bind: any;
+  bind?: any;
   position?: string;
   label: string;
   required?: boolean;
