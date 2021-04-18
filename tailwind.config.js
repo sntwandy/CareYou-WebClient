@@ -20,7 +20,11 @@ module.exports = {
         'menuIcon': '1.25rem',
         'menu': '12.131rem',
         'menuImg': '4.375rem',
-      }
+      },
+      backgroundImage: theme => ({
+        'bg-main': "url('https://i.imgur.com/2tSOxVz.jpg')",
+        'footer-texture': "url('/img/footer-texture.png')",
+      })
     },
     height: {
       primaryButton: '2.8125rem',

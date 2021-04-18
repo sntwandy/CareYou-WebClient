@@ -9,15 +9,15 @@ const Layout = (props: any) => {
   return (
     <>
       <Head>
-        <title>CareYou: Your health matters to us</title>
+        <title>CareYou: Take Care Of Your Health.</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <main>
+      <main className={'bg-bg-main bg-no-repeat bg-center bg-cover'}>
         {props.children}
       </main>
-      <footer>
+      {/* <footer>
         CareYou 2021
-      </footer>
+      </footer> */}
     </>
   )
 };

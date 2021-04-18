@@ -71,7 +71,7 @@ export interface IWarningnModalToConfirm {
 export interface IDiagnosisModal {
   diagnosisModal: boolean;
   setDiagnosisModal: (value: boolean) => void;
-  diagnosisResults: []
+  diagnosisResults: IDiagnosisResults[]
 };
 
 export interface ITitle {

@@ -5,20 +5,16 @@
 import React ,{ FC, ReactElement, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { IUser } from '../../utils/interfaces';
 
-interface IProps {
-  name: string;
-  lastName: string;
-};
-
-const Menu: FC<IProps> = (props: IProps): ReactElement => {
+const Menu: FC = (): ReactElement => {
 
   /* Initializations */
-  const { name, lastName } = props;
   const router = useRouter();
 
   /* Local State */
   const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const [userInfo, setUserInfo] = useState<IUser>()
   const [menuOpenStyle, setMenuOpenStyle] = useState('transition ease-in duration-75 transform opacity-0 scale-95 translate-x-0');
 
   /* Functions */
@@ -36,6 +32,11 @@ const Menu: FC<IProps> = (props: IProps): ReactElement => {
     }
   }, [menuIsOpen]);
 
+  useEffect(() => {
+    const userData = localStorage.getItem('UserInfo');
+    userData && setUserInfo(JSON.parse(userData));
+  }, [])
+
   return (
     <>
       <div className="relative inline-block text-left">
@@ -52,7 +53,7 @@ const Menu: FC<IProps> = (props: IProps): ReactElement => {
       <div className={`${menuOpenStyle} flex items-start justify-top flex-col w-menu h-menu origin-top-right absolute left-0 mt-2 rounded-input bg-primary shadow-lg text-secondary ring-1 ring-black ring-opacity-5 divide-y divide-gray-100`} role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
         <div className={'flex items-center justify-center flex-col w-full pt-10 pb-10'}>
           <img className={'w-menuImg'} src="https://i.imgur.com/vrjAdf8.png" alt="Menu img"/>
-          <span className={'mt-4'}>{name} {lastName}</span>
+          <span className={'mt-4'}>{userInfo?.name} {userInfo?.lastName}</span>
         </div>
         <div className="py-1 w-full flex items-start justify-start pt-4 pb-4">
           <img className={'w-menuIcon ml-4 mr-1'} src="https://i.imgur.com/I7j7gYQ.png" alt="Home icon"/>

@@ -9,7 +9,7 @@ import WarningToConfirmModal from '../../components/Modals/WarningToConfirm';
 import WarningModal from '../../components/Modals/Warning';
 import DiagnosisModal from '../../components/Modals/DiagnosisResults';
 import Button from '../../components/Buttons/PrimaryButton';
-import Auth from '../../utils/Auth';
+import Auth from '../../utils/auth';
 import axios, { AxiosResponse } from 'axios';
 import { ISearch, IUser, IDiagnosisResults } from '../../utils/interfaces';
 import JWT from '../../utils/jwt';
@@ -48,7 +48,7 @@ const Home: FC = (): ReactElement => {
 
   /* Local State */
   const [token, setToken] = useState(String);
-  const [userInfo, setUserInfo] = useState(UserInitState);
+  const [userInfo, setUserInfo] = useState<IUser>();
   const [toDeleteSymptom, setToDeleteSymptom] = useState('');
   const [toDeleteSymptomConfirm, setToDeleteSymptomConfirm] = useState(false);
   const [filteredSymptoms, setFilteredSymptoms] = useState(filteredInitState);
@@ -127,8 +127,13 @@ const Home: FC = (): ReactElement => {
         }
       }
     )
-    setUserInfo(response.data.body);
-  }
+    delete response.data.body.password;
+    delete response.data.body.email;
+    delete response.data.body.idCard;
+    delete response.data.body.birthDate;
+    localStorage.setItem('UserInfo', JSON.stringify(response.data.body));
+    setUserInfo(response.data.body)
+  };
 
   /* Component Update */
   useEffect(() => {
@@ -150,10 +155,10 @@ const Home: FC = (): ReactElement => {
       <Auth>
         <div className={'w-full h-full'}>
           {/* Menu */}
-          <Menu name={userInfo.name} lastName={userInfo.lastName} />
+          <Menu />
           {/* Title */}
           <div className={'flex items-center justify-center flex-col'}>
-            <Title title={'Good Morning'} fontSize={'text-lg'} fontWeight={'font-light'} userName={userInfo.name + " " + userInfo.lastName} />
+            <Title title={'Good Morning'} fontSize={'text-lg'} fontWeight={'font-light'} userName={userInfo?.name + " " + userInfo?.lastName} />
             <Title title={'Welcome to CareYou'} fontSize={'text-lg'} marginTop={'mt-2'} fontWeight={'font-light'} />
           </div>
           {/* Inputs */}

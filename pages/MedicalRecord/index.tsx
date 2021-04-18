@@ -5,11 +5,12 @@
 import React, { FC, ReactElement, useState } from 'react';
 import RadioGroup from '../../components/Inputs/RadioGroup';
 import Input from '../../components/Inputs/PrimaryInput';
-import RecordCard, { IRecord } from '../../components/UI/RecordCard';
+import RecordCard from '../../components/UI/RecordCard';
 import Title from '../../components/Titles/Title';
 import Menu from '../../components/Menu';
 import useInput from '../../hooks/useInput';
-import Auth from '../../utils/Auth';
+import Auth from '../../utils/auth';
+import { IRecordCard } from '../../utils/interfaces';
 
 const MedicalRecord: FC = (): ReactElement => {
 
@@ -31,7 +32,7 @@ const MedicalRecord: FC = (): ReactElement => {
     text: 'Older',
     value: 'older'
   }]
-  const records: IRecord[] = [{
+  const records: IRecordCard[] = [{
     date: new Date(),
     attendant: 'Megan Herrera',
     case: 'Flu'
