@@ -12,14 +12,12 @@ const Layout = (props: any) => {
         <title>CareYou: Take Care Of Your Health.</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <main className={'bg-bg-main bg-no-repeat bg-center bg-cover'}>
-        {props.children}
-      </main>
+      <main className={'bg-secondary'}>{props.children}</main>
       {/* <footer>
         CareYou 2021
       </footer> */}
     </>
-  )
+  );
 };
 
 export default Layout;

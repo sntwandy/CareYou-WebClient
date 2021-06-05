@@ -11,12 +11,12 @@ export interface useInputInterface {
     value: string;
     onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   };
-};
+}
 
 export interface ISearch {
   id: number;
   name: string;
-};
+}
 
 export interface IButtons {
   onClick: Function;
@@ -25,7 +25,7 @@ export interface IButtons {
   inverted?: boolean;
   middle?: boolean;
   full?: boolean;
-};
+}
 
 export interface IInputs {
   onChange: Function;
@@ -38,12 +38,12 @@ export interface IInputs {
   disabled?: boolean;
   onError?: boolean;
   onValidation?: boolean;
-};
+}
 
 export interface IOption {
   text?: string;
-  value: any
-};
+  value: any;
+}
 
 export interface IRadioGroup {
   onChange: Function;
@@ -53,26 +53,27 @@ export interface IRadioGroup {
   position?: string;
   label: string;
   disabled?: boolean;
-};
+}
 
 export interface IWarningModal {
   warningModal: boolean;
   setWarningModal: (value: boolean) => void;
   message: string;
-};
+}
 
 export interface IWarningnModalToConfirm {
   warningModalToConfirm: boolean;
   setWarningModalToConfirm: (value: boolean) => void;
   toDeleteSymptom: string;
   setToDeleteSymptomConfirm: (value: boolean) => void;
-};
+}
 
 export interface IDiagnosisModal {
   diagnosisModal: boolean;
   setDiagnosisModal: (value: boolean) => void;
-  diagnosisResults: IDiagnosisResults[]
-};
+  diagnosisResults: any;
+  sendAnswer: (x: boolean) => {};
+}
 
 export interface ITitle {
   title: string;
@@ -80,7 +81,7 @@ export interface ITitle {
   fontSize?: string;
   marginTop?: string;
   userName?: string;
-};
+}
 
 export interface IRecordCard {
   date: Date;
@@ -90,7 +91,7 @@ export interface IRecordCard {
 
 export interface IRecordCardProps {
   record: IRecordCard;
-};
+}
 
 export interface IUser {
   birthDate: string;
@@ -104,10 +105,16 @@ export interface IUser {
   province: string;
   suffering: string;
   userName: string;
-};
+}
 
 export interface IDiagnosisResults {
-  disease: string;
-  symptoms: number;
-  symptomsMatch: number;
-};
+  analysisId: string;
+  analysisResults: IPathology;
+}
+
+export interface IPathology {
+  pathologyName: string;
+  pathologyValidation: boolean;
+  wasAnalyzed: boolean;
+  _id: string;
+}

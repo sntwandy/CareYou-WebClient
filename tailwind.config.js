@@ -22,8 +22,12 @@ module.exports = {
         'menuImg': '4.375rem',
       },
       backgroundImage: theme => ({
-        'bg-main': "url('https://i.imgur.com/2tSOxVz.jpg')",
-        'footer-texture': "url('/img/footer-texture.png')",
+        'bg-mobile': "url('https://i.imgur.com/2tSOxVz.jpg')",
+        'bg-mobile2': "url('https://i.imgur.com/SnyVNvS.png')",
+        'bg-desktop': "url('https://i.imgur.com/849DIgq.png')",
+        'bg-desktop2': "url('https://i.imgur.com/twnPT9G.jpg')",
+        'bg-mobileColor2': "url('https://i.imgur.com/pdYeEZe.png')",
+        'bg-desktopColor2': "url('https://i.imgur.com/AYUaEsY.png')",
       })
     },
     height: {
@@ -42,7 +46,7 @@ module.exports = {
     },
     backgroundColor: theme => ({
       ...theme('colors'),
-      'primary': '#00001e',
+      'primary': '#3E5F8A',
       'secondary': '#F4F4F4',
       'tertiary': '#E4E4E4',
     }),
@@ -59,7 +63,7 @@ module.exports = {
     borderColor: theme => ({
       ...theme('colors'),
       DEFAULT: theme('colors.gray.300', 'currentColor'),
-      'primary': '#00001e',
+      'primary': '#3E5F8A',
       'secondary': '#ffed4a',
       'danger': '#e3342f',
     }),
