@@ -5,10 +5,11 @@
 import React, { FC, ReactElement } from 'react';
 
 export interface InputProps {
-  onChange: Function;
-  value: any;
+  onChange?: Function;
+  value?: any;
   type?: string;
   placeholder?: string;
+  bind?: any;
   position?: string;
   label: string;
   required?: boolean;
@@ -16,7 +17,7 @@ export interface InputProps {
 }
 
 const Primary: FC<InputProps> = (props: InputProps): ReactElement => {
-  const { label, type = 'text', placeholder, onChange, value, required = false, disabled = false, position } = props;
+  const { label, type = 'text', placeholder, onChange, value, required = false, disabled = false, position, bind } = props;
 
   return (
     <div className={'flex items-center justify-center flex-col mb-3.5'}>
@@ -30,7 +31,8 @@ const Primary: FC<InputProps> = (props: InputProps): ReactElement => {
         value={value}
         required={required}
         disabled={disabled}
-        onChange={(e) => onChange(e)}
+        {...bind}
+        onChange={(e) => onChange && onChange(e)}
       />
     </div>
   );
