@@ -40,6 +40,10 @@ const Login: FC = (): ReactElement => {
           userName: userName,
           password: password,
         },
+        headers: {
+          ContentType: 'application/json',
+          Accept: '*/*',
+        },
       });
       response.status === 200 &&
         localStorage.setItem('Token', response.data.body.accessToken);
