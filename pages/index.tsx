@@ -2,17 +2,17 @@
  *
  */
 
-import React ,{ FC, ReactElement } from 'react';
 import Link from 'next/link';
+import React, { FC, ReactElement } from 'react';
 
-// Home page
 const Index: FC = (): ReactElement => {
   return (
-    <div>
-      <h1 className={'text-sm'}>Hello World</h1>
+    <>
+      <h1>Welcome to the Index</h1>
       <Link href={'Login'}>Login</Link>
-    </div>
-
+      <Link href={'SingUp'}>SingUp</Link>
+      <Link href={'Home'}>Home</Link>
+    </>
   )
 }
 

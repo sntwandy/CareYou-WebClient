@@ -2,21 +2,15 @@
  *
  */
 
-import React, { FC } from 'react';
+import React, { FC, ReactElement } from 'react';
+import { IInputs } from '../../utils/interfaces';
 
-export interface InputProps {
-  onChange: Function;
-  value: any;
-  type?: string;
-  placeholder?: string;
-  position?: string;
-  label: string;
-  required?: boolean;
-  disabled?: boolean;
-}
+const Primary: FC<IInputs> = (props: IInputs): ReactElement => {
 
-const Input: FC<InputProps> = (props: InputProps) => {
-  const { label, type = 'text', placeholder, onChange, value, required = false, disabled = false, position } = props;
+  /* Initializations */
+  const { label, type = 'text', placeholder, onChange, value, required = false, disabled = false, position, onError = false, onValidation = false } = props;
+  const error = 'border-2 border-red-600';
+  const validation = 'border-2 border-green-600'
 
   return (
     <div className={'flex items-center justify-center flex-col mb-3.5'}>
@@ -24,7 +18,7 @@ const Input: FC<InputProps> = (props: InputProps) => {
         {label}
       </label>
       <input
-        className={`w-primaryInput h-primaryInput text-lg text-center rounded-tl-input rounded-br-input outline-none bg-tertiary focus:ring-2 focus:ring-black ${position}`}
+        className={`w-primaryInput h-primaryInput text-lg text-center rounded-tl-input rounded-br-input outline-none bg-tertiary ${onError ? error : onValidation ? validation : 'focus:ring-2 focus:ring-black'} ${position}`}
         type={type}
         placeholder={placeholder}
         value={value}
@@ -36,4 +30,4 @@ const Input: FC<InputProps> = (props: InputProps) => {
   );
 };
 
-export default Input;
+export default Primary;

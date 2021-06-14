@@ -4,23 +4,24 @@
 
 import React, { FC, ReactElement, useState } from 'react';
 import Link from 'next/link';
-
-// Hooks
 import useInput from '../../hooks/useInput';
-
-// Components
 import Input from '../../components/Inputs/PrimaryInput';
 import Button from '../../components/Buttons/PrimaryButton';
 import Title from '../../components/Titles/Title';
+import axios, { AxiosResponse } from 'axios';
 
-// SingUp
+/* Env Variables */
+const SINGUP_USERS_URL = process.env.SINGUP_USERS_URL;
+
 const SingUp: FC = (): ReactElement => {
 
-  // Form steps and progress
+  /* Initializations */
   const progress: string[]= ['0%', '33%', '66%', '90%', '100%'];
+
+  /* Local State */
   const [step, setStep] = useState(1);
 
-  // User data to login, useInput hook
+  /* Custom Hook, useInput */
   const { value: firstName, bind: bindFirst } = useInput('');
   const { value: lastName, bind: bindLast } = useInput('');
   const { value: birthDate, bind: bindBirthDate } = useInput('');
@@ -35,23 +36,22 @@ const SingUp: FC = (): ReactElement => {
   const { value: email, bind: bindEmail } = useInput('');
   const { value: password, bind: bindPassword } = useInput('');
 
-  // Handling submit button
-  const handleSubmit = (): void => {
-    console.log({
-      firstName,
-      lastName,
-      birthDate,
-      gender,
-      country,
-      province,
-      postalCode,
-      addressLine,
-      suffering,
-      idCard,
-      userName,
-      email,
-      password,
-    });
+  /* Functions */
+  const handleSubmit = async () => {
+    const response: AxiosResponse = await axios.post(`${SINGUP_USERS_URL}`, {
+      'name': firstName,
+      'lastName': lastName,
+      'userName': userName,
+      'email': email,
+      'password': password,
+      'birthDate': birthDate,
+      'idCard': idCard,
+      'suffering': suffering,
+      'country': country,
+      'province': province,
+      'postalCode': postalCode
+    })
+    console.log(response);
   };
 
   return (
@@ -62,20 +62,20 @@ const SingUp: FC = (): ReactElement => {
           <img className={'w-full'} src={'https://i.imgur.com/N9aSUrx.png'} alt={'Login img'} />
         </figure>
         <div className={'mb-6'}>
-          <Title title={'Sing Up'} />
+          <Title title={'Sing Up'} marginTop={'mt-2'} />
         </div>
-        <div className={'w-primaryInput h-8 rounded-input bg-secondary'}>
+        <div className={'w-primaryInput h-8 rounded-input border-primary border bg-secondary'}>
           <div className={'h-7 bg-primary rounded-input'} style={{ width: progress[step - 1] }} >
             <span className={`w-primaryInput h-8 flex items-center justify-center text-lg ${step >= 3 ? 'text-secondary' : 'text-black'}`}>{progress[step - 1]}</span>
           </div>
         </div>
-        <div className={'w-60 h-7 bg-primary text-center hidden'}>
+        {/* <div className={'w-60 h-7 bg-primary border-primary border text-center'}>
           <div className={'h-7 bg-secondary'} style={{ width: progress[step - 1] }}>
             <span className={'absolute text-lg'} style={{ left: 'calc(50% - 12px)' }}>
               {progress[step - 1]}
             </span>
           </div>
-        </div>
+        </div> */}
       </div>
       {/* FORM FIELDS */}
       <div className={'flex items-center justify-center flex-col'}>
@@ -91,7 +91,7 @@ const SingUp: FC = (): ReactElement => {
           <div>
             <Input label="Country" placeholder="Dominican Republic" {...bindCountry} required />
             <Input label="Province" placeholder="Santo Domingo" {...bindProvince} required />
-            <Input label="Postal Code" placeholder="41000" {...bindPostalCode} required />
+            <Input label="Postal Code" placeholder="41000" {...bindPostalCode} />
             <Input label="Address Lines" placeholder="Autopista Duarte, #17" {...bindAddressLine} required />
           </div>
         )}
