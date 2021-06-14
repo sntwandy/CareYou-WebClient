@@ -98,9 +98,9 @@ const DiagnosisResults: FC<IDiagnosisModal> = (
               </div>
               <div className={'w-full'}>
                 <p>
-                  {diagnosisResults.analysisResults.pathologyName
+                  {diagnosisResults?.analysisResults?.pathologyName
                     ? diagnosisResults.analysisResults.pathologyName
-                    : diagnosisResults.analysisResults}
+                    : diagnosisResults?.analysisResults}
                 </p>
               </div>
             </div>
@@ -110,7 +110,7 @@ const DiagnosisResults: FC<IDiagnosisModal> = (
               'bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse'
             }
           >
-            {diagnosisResults.analysisResults.pathologyName ? (
+            {diagnosisResults?.analysisResults?.pathologyName ? (
               <>
                 <button
                   type={'button'}

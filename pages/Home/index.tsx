@@ -17,6 +17,7 @@ import DiagnosisModal from '../../components/Modals/DiagnosisResults';
 import Button from '../../components/Buttons/PrimaryButton';
 import Auth from '../../utils/auth';
 import axios, { AxiosResponse } from 'axios';
+import Loading from '../../components/Loading';
 import { ISearch, IUser, IDiagnosisResults } from '../../utils/interfaces';
 import JWT from '../../utils/jwt';
 
@@ -27,28 +28,57 @@ const GET_USER_URL = process.env.GET_USER_URL;
 const Home: FC = (): ReactElement => {
   /* Mock Data */
   const data: ISearch[] = [
-    { id: 1, name: 'Headache' },
-    { id: 2, name: 'Fever' },
-    { id: 3, name: 'Eye pain' },
-    { id: 4, name: 'Sneezing' },
+    { id: 1, name: 'shortness of breath' },
+    { id: 2, name: 'chest pain or tightness' },
+    { id: 3, name: 'wheezing when exhaling' },
+    { id: 4, name: 'sudden chest pain' },
+    { id: 5, name: 'difficulty breathing' },
+    { id: 6, name: 'cough' },
+    {
+      id: 7,
+      name: 'mucus, which may be clear, white, yellowish-gray, or green',
+    },
+    {
+      id: 8,
+      name: 'fatigue',
+    },
+    {
+      id: 9,
+      name: 'slight fever and chills',
+    },
+    {
+      id: 10,
+      name: 'chest discomfort',
+    },
+    {
+      id: 11,
+      name: 'chest pain when breathing or coughing',
+    },
+    {
+      id: 12,
+      name: 'disorientation or changes in mental perception',
+    },
+    {
+      id: 13,
+      name: 'cough that can produce phlegm',
+    },
+    {
+      id: 14,
+      name: 'fever, sweating, and shivering chills',
+    },
+    {
+      id: 15,
+      name: 'lower than normal body temperature',
+    },
+    {
+      id: 16,
+      name: 'nausea, vomiting, or diarrhea',
+    },
   ];
 
   /* Initializations */
   const filteredInitState: ISearch[] = [];
   const symptomsInitState: string[] = [];
-  const UserInitState: IUser = {
-    birthDate: '',
-    country: '',
-    email: '',
-    idCard: '',
-    lastName: '',
-    name: '',
-    password: '',
-    postalCode: '',
-    province: '',
-    suffering: '',
-    userName: '',
-  };
 
   /* Local State */
   const [token, setToken] = useState(String);
@@ -61,6 +91,7 @@ const Home: FC = (): ReactElement => {
   const [warningModal, setWarningModal] = useState(false);
   const [diagnosisModal, setDiagnosisModal] = useState(false);
   const [diagnosisResults, setDiagnosisResults] = useState<IDiagnosisResults>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   /* Functions */
   const handleInputSearch = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -97,12 +128,13 @@ const Home: FC = (): ReactElement => {
   };
 
   const startTest = async () => {
+    setIsLoading(true);
     const token = localStorage.getItem('Token');
     try {
       const response: AxiosResponse = await axios.post(
         `${DIAGNOSIS_URL}`,
         {
-          symptoms: ['cough'],
+          symptoms,
         },
         {
           headers: {
@@ -110,6 +142,7 @@ const Home: FC = (): ReactElement => {
           },
         }
       );
+      response.data.body && setIsLoading(false);
       await setDiagnosisResults(response.data.body);
       console.log();
       setDiagnosisModal(true);
@@ -144,6 +177,7 @@ const Home: FC = (): ReactElement => {
   };
 
   const sendAnswer = async (validation: boolean) => {
+    setIsLoading(true);
     const token = localStorage.getItem('Token');
     try {
       const response: AxiosResponse = await axios.post(
@@ -162,7 +196,7 @@ const Home: FC = (): ReactElement => {
           },
         }
       );
-      console.log(response.data.body);
+      response.data.body && setIsLoading(false);
       await setDiagnosisResults(response.data.body);
       setDiagnosisModal(true);
     } catch (error) {
@@ -294,6 +328,9 @@ const Home: FC = (): ReactElement => {
               toDeleteSymptom={toDeleteSymptom}
               setToDeleteSymptomConfirm={setToDeleteSymptomConfirm}
             />
+          </div>
+          <div className={isLoading ? 'visible' : 'invisible'}>
+            <Loading />
           </div>
           <div className={warningModal ? 'visible' : 'invisible'}>
             <WarningModal
