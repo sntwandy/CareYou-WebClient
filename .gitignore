@@ -169,6 +169,5 @@ dist
 
 yarn.lock
 package-lock.json
-next.config.js
 
 # End of https://www.toptal.com/developers/gitignore/api/node,yarn
