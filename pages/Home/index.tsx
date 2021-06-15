@@ -257,7 +257,7 @@ const Home: FC = (): ReactElement => {
                 onChange={(e) => handleInputSearch(e)}
               />
               <div>
-                <ul className={'w-primaryInput h-auto text-center mt-2'}>
+                <ul style={{ height: 32*4, overflowY: 'scroll' }} className={'w-primaryInput h-auto text-center mt-2 bg-primary text-secondary font-extralight capitalize rounded-tl-input rounded-br-input'}>
                   {filteredSymptoms.map((item) => {
                     return (
                       <li
@@ -265,7 +265,7 @@ const Home: FC = (): ReactElement => {
                         onClick={(e) =>
                           setMySymptoms(e.currentTarget.innerText)
                         }
-                        className={'cursor-pointer'}
+                        className={'cursor-pointer text-lg text-white mb-1 mt-1 hover:text-primary hover:bg-secondary'}
                       >
                         {item.name}
                       </li>
