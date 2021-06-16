@@ -25,6 +25,7 @@ export interface IButtons {
   inverted?: boolean;
   middle?: boolean;
   full?: boolean;
+  type?: string;
 }
 
 export interface IInputs {
@@ -38,6 +39,9 @@ export interface IInputs {
   disabled?: boolean;
   onError?: boolean;
   onValidation?: boolean;
+  bind?: any;
+  error?: boolean;
+  validation?: string;
 }
 
 export interface IOption {

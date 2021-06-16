@@ -9,24 +9,17 @@
     "lint": "eslint --ext .ts,.tsx"
   },
   "dependencies": {
-<<<<<<< HEAD
     "axios": "^0.21.1",
-=======
     "@hookform/resolvers": "^2.0.0",
->>>>>>> 3917c6a2cabead029d0ad1408e3408bf3876319a
     "date-fns": "^2.19.0",
     "jsonwebtoken": "^8.5.1",
     "next": "^10.0.7",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-<<<<<<< HEAD
     "tailwindcss": "^2.0.3",
-    "postcss": "^8.2.6"
-=======
+    "postcss": "^8.2.6",
     "react-hook-form": "^7.0.4",
-    "tailwindcss": "^2.0.3",
     "yup": "^0.32.9"
->>>>>>> 3917c6a2cabead029d0ad1408e3408bf3876319a
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",

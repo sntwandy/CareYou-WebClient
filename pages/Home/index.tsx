@@ -36,7 +36,7 @@ const Home: FC = (): ReactElement => {
     { id: 6, name: 'cough' },
     {
       id: 7,
-      name: 'mucus, which may be clear, white, yellowish-gray, or green',
+      name: 'clear, white, yellowish-gray, or green mucus',
     },
     {
       id: 8,
@@ -257,18 +257,20 @@ const Home: FC = (): ReactElement => {
                 onChange={(e) => handleInputSearch(e)}
               />
               <div>
-                <ul className={'w-primaryInput h-auto text-center mt-2'}>
-                  {filteredSymptoms.map((item) => {
+                <ul className={'w-primaryInput h-auto text-start mt-2'}>
+                  {filteredSymptoms.map((item, i) => {
                     return (
-                      <li
-                        key={item.id}
-                        onClick={(e) =>
-                          setMySymptoms(e.currentTarget.innerText)
-                        }
-                        className={'cursor-pointer'}
-                      >
-                        {item.name}
-                      </li>
+                      i <= 4 && (
+                        <li
+                          key={item.id}
+                          onClick={(e) =>
+                            setMySymptoms(e.currentTarget.innerText)
+                          }
+                          className={'cursor-pointer'}
+                        >
+                          {item.name}
+                        </li>
+                      )
                     );
                   })}
                 </ul>

@@ -142,6 +142,17 @@ const DiagnosisResults: FC<IDiagnosisModal> = (
                 <button
                   type={'button'}
                   className={
+                    ' w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary text-base font-medium text-secondary hover:text-primaryButtonHover focus:outline-none focus:ring-2 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm'
+                  }
+                  onClick={() => {
+                    setDiagnosisModal(!diagnosisModal);
+                  }}
+                >
+                  See details
+                </button>
+                <button
+                  type={'button'}
+                  className={
                     'mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 text-base font-medium bg-secondary text-primary hover:text-secondaryButtonHover border-button border-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm'
                   }
                   onClick={() => {
@@ -149,17 +160,6 @@ const DiagnosisResults: FC<IDiagnosisModal> = (
                   }}
                 >
                   Okay
-                </button>
-                <button
-                  type={'button'}
-                  className={
-                    'w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary text-base font-medium text-secondary hover:text-primaryButtonHover focus:outline-none focus:ring-2 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm'
-                  }
-                  onClick={() => {
-                    setDiagnosisModal(!diagnosisModal);
-                  }}
-                >
-                  See details
                 </button>
               </>
             )}
