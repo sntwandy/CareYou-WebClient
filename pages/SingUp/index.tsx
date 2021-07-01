@@ -4,65 +4,20 @@
 
 import React, { FC, ReactElement, useState } from 'react';
 import Link from 'next/link';
-<<<<<<< HEAD
-import useInput from '../../hooks/useInput';
-=======
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 // Components
->>>>>>> 3917c6a2cabead029d0ad1408e3408bf3876319a
 import Input from '../../components/Inputs/PrimaryInput';
 import Button from '../../components/Buttons/PrimaryButton';
 import Title from '../../components/Titles/Title';
 import axios, { AxiosResponse } from 'axios';
+import { IUser } from '../../utils/interfaces';
 
 /* Env Variables */
 const SINGUP_USERS_URL = process.env.SINGUP_USERS_URL;
 
-<<<<<<< HEAD
-const SingUp: FC = (): ReactElement => {
-
-  /* Initializations */
-  const progress: string[]= ['0%', '33%', '66%', '90%', '100%'];
-
-  /* Local State */
-  const [step, setStep] = useState(1);
-
-  /* Custom Hook, useInput */
-  const { value: firstName, bind: bindFirst } = useInput('');
-  const { value: lastName, bind: bindLast } = useInput('');
-  const { value: birthDate, bind: bindBirthDate } = useInput('');
-  const { value: gender, bind: bindGender } = useInput('');
-  const { value: country, bind: bindCountry } = useInput('');
-  const { value: province, bind: bindProvince } = useInput('');
-  const { value: postalCode, bind: bindPostalCode } = useInput('');
-  const { value: addressLine, bind: bindAddressLine } = useInput('');
-  const { value: suffering, bind: bindSuffering } = useInput('');
-  const { value: idCard, bind: bindIdCard } = useInput('');
-  const { value: userName, bind: bindUserName } = useInput('');
-  const { value: email, bind: bindEmail } = useInput('');
-  const { value: password, bind: bindPassword } = useInput('');
-
-  /* Functions */
-  const handleSubmit = async () => {
-    const response: AxiosResponse = await axios.post(`${SINGUP_USERS_URL}`, {
-      'name': firstName,
-      'lastName': lastName,
-      'userName': userName,
-      'email': email,
-      'password': password,
-      'birthDate': birthDate,
-      'idCard': idCard,
-      'suffering': suffering,
-      'country': country,
-      'province': province,
-      'postalCode': postalCode
-    })
-    console.log(response);
-  };
-=======
 interface IFormSchema {
     firstName: string;
     lastName: string;
@@ -108,17 +63,17 @@ const SingUp: FC = (): ReactElement => {
   const [step, setStep] = useState(1);
 
   // Handling submit button
-  const onSubmit = handleSubmit(data => {
+  const onSubmit = handleSubmit(async data => {
     if (step <= 4) {
       setStep(step + 1)
     }
-    console.log('onSubmit', data)
+      const response: AxiosResponse<IUser> = await axios.post(`${SINGUP_USERS_URL}`, data)
+      console.log(response);
   });
   const ifValidationErrors: boolean = !!Object.keys(errors).length;
 
   // TODO: Use a stylized component here to render fancy errors
   const _renderError = (field: keyof IFormSchema) => errors[field]?.message;
->>>>>>> 3917c6a2cabead029d0ad1408e3408bf3876319a
 
   return (
     <form className={'flex items-center justify-center flex-col w-full h-full'} onSubmit={onSubmit}>
@@ -159,12 +114,6 @@ const SingUp: FC = (): ReactElement => {
         )}
         {step === 2 && (
           <div>
-<<<<<<< HEAD
-            <Input label="Country" placeholder="Dominican Republic" {...bindCountry} required />
-            <Input label="Province" placeholder="Santo Domingo" {...bindProvince} required />
-            <Input label="Postal Code" placeholder="41000" {...bindPostalCode} />
-            <Input label="Address Lines" placeholder="Autopista Duarte, #17" {...bindAddressLine} required />
-=======
             <Input label="Country" placeholder="Dominican Republic" bind={register('country')} required />
             {_renderError('country')}
             <Input label="Province" placeholder="Santo Domingo" bind={register('province')} required />
@@ -173,7 +122,6 @@ const SingUp: FC = (): ReactElement => {
             {_renderError('postalCode')}
             <Input label="Address Lines" placeholder="Autopista Duarte, #17" bind={register('addressLine')} required />
             {_renderError('addressLine')}
->>>>>>> 3917c6a2cabead029d0ad1408e3408bf3876319a
           </div>
         )}
         {step === 3 && (
