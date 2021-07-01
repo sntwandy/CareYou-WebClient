@@ -35,6 +35,7 @@ export interface IInputs {
   placeholder?: string;
   position?: string;
   label: string;
+  bind?: any;
   required?: boolean;
   disabled?: boolean;
   onError?: boolean;

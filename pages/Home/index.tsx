@@ -257,20 +257,18 @@ const Home: FC = (): ReactElement => {
                 onChange={(e) => handleInputSearch(e)}
               />
               <div>
-                <ul className={'w-primaryInput h-auto text-start mt-2'}>
-                  {filteredSymptoms.map((item, i) => {
+                <ul style={{ height: 32*4, overflowY: 'scroll' }} className={'w-primaryInput h-auto text-center mt-2 bg-primary text-secondary font-extralight capitalize rounded-tl-input rounded-br-input'}>
+                  {filteredSymptoms.map((item) => {
                     return (
-                      i <= 4 && (
-                        <li
-                          key={item.id}
-                          onClick={(e) =>
-                            setMySymptoms(e.currentTarget.innerText)
-                          }
-                          className={'cursor-pointer'}
-                        >
-                          {item.name}
-                        </li>
-                      )
+                      <li
+                        key={item.id}
+                        onClick={(e) =>
+                          setMySymptoms(e.currentTarget.innerText)
+                        }
+                        className={'cursor-pointer text-lg text-white mb-1 mt-1 hover:text-primary hover:bg-secondary'}
+                      >
+                        {item.name}
+                      </li>
                     );
                   })}
                 </ul>

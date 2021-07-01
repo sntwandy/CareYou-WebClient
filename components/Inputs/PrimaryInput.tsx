@@ -5,19 +5,9 @@
 import React, { FC, ReactElement } from 'react';
 import { IInputs } from '../../utils/interfaces';
 
-export interface InputProps {
-  onChange?: Function;
-  value?: any;
-  type?: string;
-  placeholder?: string;
-  bind?: any;
-  position?: string;
-  label: string;
-  required?: boolean;
-  disabled?: boolean;
-}
 
 const Primary: FC<IInputs> = (props: IInputs): ReactElement => {
+  /* Initializations */
   const {
     label,
     type = 'text',
@@ -27,12 +17,12 @@ const Primary: FC<IInputs> = (props: IInputs): ReactElement => {
     required = false,
     disabled = false,
     position,
+    onError = false,
+    onValidation = false,
     bind,
-    onError,
-    error,
-    onValidation,
-    validation,
   } = props;
+  const error = 'border-2 border-red-600';
+  const validation = 'border-2 border-green-600';
 
   return (
     <div className={'flex items-center justify-center flex-col mb-3.5'}>
