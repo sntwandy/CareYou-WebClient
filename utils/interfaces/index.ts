@@ -1,7 +1,7 @@
 /**
  *
  */
-import { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import React, { ChangeEvent, Dispatch, SetStateAction } from 'react';
 
 export interface useInputInterface {
   value: string;
@@ -93,8 +93,9 @@ export interface IRecordCard {
   case: String;
 }
 
-export interface IRecordCardProps {
+export interface IRecordCardProps extends React.HTMLAttributes<any>{
   record: IRecordCard;
+  dateFormat?: string;
 }
 
 export interface IUser {
