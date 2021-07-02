@@ -62,7 +62,7 @@ const Menu: FC = (): ReactElement => {
         <div className="py-1 w-full flex items-start justify-start pt-4 pb-4 flex-col">
           <div className={'flex items-center justify-start'}>
             <img className={'w-menuIcon ml-4 mr-1'} src={'https://i.imgur.com/khkvbwh.png'} alt={'Home icon'}/>
-            <Link href={'/'}>Appointment</Link>
+            <Link href={'/Appointments'}>Appointment</Link>
           </div>
           <div className={'flex items-center justify-start mt-4'}>
             <img className={'w-menuIcon ml-4 mr-1'} src={'https://i.imgur.com/2KZ4j6y.png'} alt={'Home icon'}/>

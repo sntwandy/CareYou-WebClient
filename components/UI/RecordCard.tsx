@@ -7,15 +7,15 @@ import format from 'date-fns/format';
 import { IRecordCardProps } from '../../utils/interfaces';
 
 const RecordCard = (props: IRecordCardProps): ReactElement => {
-  const { record } = props;
+  const { record, dateFormat = 'yyyy/MM/dd' } = props;
   return (
-    <div className={'flex flex-wrap items-center justify-center bg-black text-white font-light text-sm rounded-tl-input rounded-br-input p-3'} style={{color: '#fff'}}>
+    <div className={'flex flex-wrap items-center justify-center bg-black text-white font-light text-sm rounded-tl-input rounded-br-input p-3'} style={{color: '#fff', margin: '0 18px', minWidth: '200px' }}>
       <div className={'flex mb-2'} style={{ width: '100%' }}>
         <div className={'flex flex-1'} style={{}}>
           <span className="mr-1">
             <img src={'https://i.imgur.com/8D02AvD.png'} alt={'Calendar Icon'} />
           </span>
-          {format(record.date, 'yyyy/MM/dd')}
+          {format(record.date, dateFormat)}
         </div>
         <div className={'flex flex-1 flex-row-reverse'} style={{ textAlign: 'end' }}>
           <img src={'https://i.imgur.com/0xEUuBg.png'} alt={'Calendar Icon'} />
