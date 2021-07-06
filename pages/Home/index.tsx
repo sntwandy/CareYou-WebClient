@@ -92,6 +92,7 @@ const Home: FC = (): ReactElement => {
   const [diagnosisModal, setDiagnosisModal] = useState(false);
   const [diagnosisResults, setDiagnosisResults] = useState<IDiagnosisResults>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [emptySymptoms, setEmptySymptoms] = useState<boolean>(false);
 
   /* Functions */
   const handleInputSearch = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -128,26 +129,30 @@ const Home: FC = (): ReactElement => {
   };
 
   const startTest = async () => {
-    setIsLoading(true);
-    const token = localStorage.getItem('Token');
-    try {
-      const response: AxiosResponse = await axios.post(
-        `${DIAGNOSIS_URL}`,
-        {
-          symptoms,
-        },
-        {
-          headers: {
-            Authorization: token,
+    if (symptoms.length) {
+      setIsLoading(true);
+      const token = localStorage.getItem('Token');
+      try {
+        const response: AxiosResponse = await axios.post(
+          `${DIAGNOSIS_URL}`,
+          {
+            symptoms,
           },
-        }
-      );
-      response.data.body && setIsLoading(false);
-      await setDiagnosisResults(response.data.body);
-      console.log();
-      setDiagnosisModal(true);
-    } catch (error) {
-      console.log(error);
+          {
+            headers: {
+              Authorization: token,
+            },
+          }
+        );
+        response.data.body && setIsLoading(false);
+        await setDiagnosisResults(response.data.body);
+        console.log();
+        setDiagnosisModal(true);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      setEmptySymptoms(true);
     }
   };
 
@@ -257,7 +262,11 @@ const Home: FC = (): ReactElement => {
                 onChange={(e) => handleInputSearch(e)}
               />
               <div>
-                <ul style={{ height: 32*4, overflowY: 'scroll' }} className={'w-primaryInput h-auto text-center mt-2 bg-primary text-secondary font-extralight capitalize rounded-tl-input rounded-br-input'}>
+                <ul
+                  className={
+                    'w-primaryInput max-h-36 overflow-scroll overscroll-y-auto h-auto text-center mt-2 bg-primary text-secondary font-extralight capitalize rounded-tl-input rounded-br-input'
+                  }
+                >
                   {filteredSymptoms.map((item) => {
                     return (
                       <li
@@ -265,7 +274,9 @@ const Home: FC = (): ReactElement => {
                         onClick={(e) =>
                           setMySymptoms(e.currentTarget.innerText)
                         }
-                        className={'cursor-pointer text-lg text-white mb-1 mt-1 hover:text-primary hover:bg-secondary'}
+                        className={
+                          'cursor-pointer text-lg text-white mb-1 mt-1 hover:text-primary hover:bg-secondary'
+                        }
                       >
                         {item.name}
                       </li>
@@ -333,13 +344,23 @@ const Home: FC = (): ReactElement => {
             <Loading />
           </div>
           <div className={warningModal ? 'visible' : 'invisible'}>
+            {/* When you selecte the same symptom */}
             <WarningModal
               warningModal={warningModal}
               setWarningModal={setWarningModal}
               message={`You have already selected that symptom`}
             />
           </div>
+          <div className={emptySymptoms ? 'visible' : 'invisible'}>
+            {/* When you start the test and you don't have any symptom selected */}
+            <WarningModal
+              warningModal={emptySymptoms}
+              setWarningModal={setEmptySymptoms}
+              message={`You need to select your symptoms before make the pre-diagnosis.`}
+            />
+          </div>
           <div className={diagnosisModal ? 'visible' : 'invisible'}>
+            {/* While the pre-diagnosis process is running, answers questions and see the final result */}
             <DiagnosisModal
               diagnosisModal={diagnosisModal}
               setDiagnosisModal={setDiagnosisModal}
