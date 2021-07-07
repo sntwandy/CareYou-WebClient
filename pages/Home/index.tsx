@@ -19,6 +19,7 @@ import Auth from '../../utils/auth';
 import axios, { AxiosResponse } from 'axios';
 import Loading from '../../components/Loading';
 import { ISearch, IUser, IDiagnosisResults } from '../../utils/interfaces';
+import TermsConditionsModal from '../../components/Modals/TermsAndConditions';
 import JWT from '../../utils/jwt';
 
 /* ENV VARIABLES */
@@ -93,6 +94,10 @@ const Home: FC = (): ReactElement => {
   const [diagnosisResults, setDiagnosisResults] = useState<IDiagnosisResults>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [emptySymptoms, setEmptySymptoms] = useState<boolean>(false);
+  const [termsConditionsModal, setTermsConditionsModal] =
+    useState<boolean>(false);
+  const [termsConditionsAccepted, setTermsConditionsAccepted] =
+    useState<boolean>(false);
 
   /* Functions */
   const handleInputSearch = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -130,26 +135,30 @@ const Home: FC = (): ReactElement => {
 
   const startTest = async () => {
     if (symptoms.length) {
-      setIsLoading(true);
-      const token = localStorage.getItem('Token');
-      try {
-        const response: AxiosResponse = await axios.post(
-          `${DIAGNOSIS_URL}`,
-          {
-            symptoms,
-          },
-          {
-            headers: {
-              Authorization: token,
+      if (termsConditionsAccepted) {
+        setIsLoading(true);
+        const token = localStorage.getItem('Token');
+        console.log(token);
+        try {
+          const response: AxiosResponse = await axios.post(
+            `${DIAGNOSIS_URL}`,
+            {
+              symptoms,
             },
-          }
-        );
-        response.data.body && setIsLoading(false);
-        await setDiagnosisResults(response.data.body);
-        console.log();
-        setDiagnosisModal(true);
-      } catch (error) {
-        console.log(error);
+            {
+              headers: {
+                Authorization: token,
+              },
+            }
+          );
+          response.data.body && setIsLoading(false);
+          await setDiagnosisResults(response.data.body);
+          setDiagnosisModal(true);
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        setTermsConditionsModal(!termsConditionsModal);
       }
     } else {
       setEmptySymptoms(true);
@@ -223,6 +232,8 @@ const Home: FC = (): ReactElement => {
   useEffect(() => {
     token && JWT(token) ? getUserInfo() : null;
   }, [token]);
+
+  console.log(termsConditionsAccepted);
 
   return (
     <>
@@ -357,6 +368,14 @@ const Home: FC = (): ReactElement => {
               warningModal={emptySymptoms}
               setWarningModal={setEmptySymptoms}
               message={`You need to select your symptoms before make the pre-diagnosis.`}
+            />
+          </div>
+          <div className={termsConditionsModal ? 'visible' : 'invisible'}>
+            {/* Before start the test you need to accept Terms and Conditions */}
+            <TermsConditionsModal
+              termsConditionsModal={termsConditionsModal}
+              setTermsConditionsModal={setTermsConditionsModal}
+              setTermsConditionsAccepted={setTermsConditionsAccepted}
             />
           </div>
           <div className={diagnosisModal ? 'visible' : 'invisible'}>

@@ -93,7 +93,7 @@ export interface IRecordCard {
   case: String;
 }
 
-export interface IRecordCardProps extends React.HTMLAttributes<any>{
+export interface IRecordCardProps extends React.HTMLAttributes<any> {
   record: IRecordCard;
   dateFormat?: string;
 }
@@ -122,4 +122,10 @@ export interface IPathology {
   pathologyValidation: boolean;
   wasAnalyzed: boolean;
   _id: string;
+}
+
+export interface ITermsConditionsModal {
+  termsConditionsModal: boolean;
+  setTermsConditionsModal: (value: boolean) => void;
+  setTermsConditionsAccepted: (value: boolean) => void;
 }
