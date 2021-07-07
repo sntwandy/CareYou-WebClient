@@ -77,6 +77,7 @@ export interface IDiagnosisModal {
   setDiagnosisModal: (value: boolean) => void;
   diagnosisResults: any;
   sendAnswer: (x: boolean) => {};
+  setTermsConditionsAccepted: (value: boolean) => void;
 }
 
 export interface ITitle {

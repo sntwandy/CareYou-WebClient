@@ -138,7 +138,7 @@ const Home: FC = (): ReactElement => {
       if (termsConditionsAccepted) {
         setIsLoading(true);
         const token = localStorage.getItem('Token');
-        console.log(token);
+        console.log(symptoms);
         try {
           const response: AxiosResponse = await axios.post(
             `${DIAGNOSIS_URL}`,
@@ -233,6 +233,10 @@ const Home: FC = (): ReactElement => {
     token && JWT(token) ? getUserInfo() : null;
   }, [token]);
 
+  useEffect(() => {
+    termsConditionsAccepted && startTest();
+  }, [termsConditionsAccepted]);
+
   console.log(termsConditionsAccepted);
 
   return (
@@ -282,9 +286,7 @@ const Home: FC = (): ReactElement => {
                     return (
                       <li
                         key={item.id}
-                        onClick={(e) =>
-                          setMySymptoms(e.currentTarget.innerText)
-                        }
+                        onClick={(e) => setMySymptoms(item.name)}
                         className={
                           'cursor-pointer text-lg text-white mb-1 mt-1 hover:text-primary hover:bg-secondary'
                         }
@@ -385,6 +387,7 @@ const Home: FC = (): ReactElement => {
               setDiagnosisModal={setDiagnosisModal}
               diagnosisResults={diagnosisResults}
               sendAnswer={sendAnswer}
+              setTermsConditionsAccepted={setTermsConditionsAccepted}
             />
           </div>
           {/* <button>Add</button> */}
