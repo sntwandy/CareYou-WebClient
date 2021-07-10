@@ -12,13 +12,15 @@
     "@hookform/resolvers": "^2.0.0",
     "axios": "^0.21.1",
     "date-fns": "^2.19.0",
+    "i18next": "^20.3.2",
     "jsonwebtoken": "^8.5.1",
     "next": "^10.0.7",
+    "postcss": "^8.2.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "tailwindcss": "^2.0.3",
-    "postcss": "^8.2.6",
     "react-hook-form": "^7.0.4",
+    "react-i18next": "^11.11.1",
+    "tailwindcss": "^2.0.3",
     "yup": "^0.32.9"
   },
   "devDependencies": {

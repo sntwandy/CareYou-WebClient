@@ -3,9 +3,11 @@
  */
 
 import React, { FC, ReactElement, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { IWarningnModalToConfirm } from '../../utils/interfaces';
 
 const WarningToConfirm: FC<IWarningnModalToConfirm> = (props: IWarningnModalToConfirm): ReactElement => {
+  const [t] = useTranslation();
 
   /* Destructuring Props */
   const { warningModalToConfirm, setWarningModalToConfirm, toDeleteSymptom, setToDeleteSymptomConfirm } = props;
@@ -45,7 +47,7 @@ const WarningToConfirm: FC<IWarningnModalToConfirm> = (props: IWarningnModalToCo
               </div>
               <div className={'mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left'}>
                 <h3 className={'text-lg leading-6 font-medium text-gray-900'} id={'modal-headline'}>
-                Are you sure you want to delete "{toDeleteSymptom}" symptom?.
+                {t('Are you sure you want to delete this symptom?')}, "{toDeleteSymptom}"
                 </h3>
               </div>
             </div>
@@ -59,7 +61,7 @@ const WarningToConfirm: FC<IWarningnModalToConfirm> = (props: IWarningnModalToCo
                 setToDeleteSymptomConfirm(true);
               }}
             >
-              Yes
+              {t('Yes')}
             </button>
             <button
               type={'button'}
@@ -69,7 +71,7 @@ const WarningToConfirm: FC<IWarningnModalToConfirm> = (props: IWarningnModalToCo
                 setToDeleteSymptomConfirm(false);
               }}
             >
-              Cancel
+              {t('Cancel')}
             </button>
           </div>
         </div>

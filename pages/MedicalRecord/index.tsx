@@ -11,10 +11,12 @@ import Menu from '../../components/Menu';
 import useInput from '../../hooks/useInput';
 import Auth from '../../utils/auth';
 import { IRecordCard } from '../../utils/interfaces';
+import { useTranslation } from 'react-i18next';
 
 const MedicalRecord: FC = (): ReactElement => {
 
   /* Initializations */
+  const [t] = useTranslation();
   const { value: findFaster, bind: bindFindFaster } = useInput(true);
   const { bind: bindDateType } = useInput('recent');
   const { bind: bindDate } = useInput('');
@@ -44,16 +46,16 @@ const MedicalRecord: FC = (): ReactElement => {
         <Menu />
         <div className={'flex items-center justify-center flex-col mb-9'}>
           <div className={'mb-6'}>
-            <Title title={'Medical Record'} />
+            <Title title={t('Medical Record')} />
           </div>
         </div>
         <div className={'flex items-center justify-center flex-col'}>
-          <RadioGroup options={boolOptions} {...bindFindFaster} name="yesOrNo" label="Would you like to find it faster?"/>
+          <RadioGroup options={boolOptions} {...bindFindFaster} name="yesOrNo" label={t('Would you like to find it faster?')}/>
           {findFaster && (
             <div>
-              <RadioGroup options={dateOptions} {...bindDateType} name="dateType" label="Date:"/>
-              <Input {...bindDate} type="date" label="Date"/>
-              <Input {...bindDate} type="select" label="Result:"/>
+              <RadioGroup options={dateOptions} {...bindDateType} name="dateType" label={t('Date')}/>
+              <Input {...bindDate} type="date" label={t('Date')}/>
+              <Input {...bindDate} type="select" label={t('Result')}/>
             </div>
           )}
         </div>

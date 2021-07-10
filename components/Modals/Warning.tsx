@@ -58,7 +58,7 @@ const WarningToConfirm: FC<IWarningModal> = (props: IWarningModal): ReactElement
                 setWarningModal(!warningModal);
               }}
             >
-              Okay
+              Ok
             </button>
           </div>
         </div>

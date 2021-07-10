@@ -1,6 +1,7 @@
 import React from 'react';
 import Layout from '../components/Layout';
 import '../styles/index.css';
+import './i18n';
 
 const App = ({ Component, pageProps }: any) => {
   return (

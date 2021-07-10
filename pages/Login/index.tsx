@@ -11,6 +11,7 @@ import Button from '../../components/Buttons/PrimaryButton';
 import axios, { AxiosResponse } from 'axios';
 import useRouter from 'next/router';
 import Modal from '../../components/Modals/Warning';
+import { useTranslation } from 'react-i18next';
 
 /* Env Variables */
 const LOGIN_USERS_URL = process.env.LOGIN_USERS_URL;
@@ -18,6 +19,7 @@ const LOGIN_USERS_URL = process.env.LOGIN_USERS_URL;
 const Login: FC = (): ReactElement => {
   /* Initializations */
   const router = useRouter;
+  const [t] = useTranslation();
   const [onError, setOnError] = useState(false);
   const [warningModal, setWarningModal] = useState(false);
   const [message, setMessage] = useState(String);
@@ -33,7 +35,7 @@ const Login: FC = (): ReactElement => {
       ? setMessage(
           'Apparently you have forgotten to fill in a field, please verify it.'
         )
-      : setMessage('Your credentials are incorrect, try again!! 😕');
+      : setMessage(t('Incorrect Credentials'));
     try {
       const response: AxiosResponse = await axios.post(`${LOGIN_USERS_URL}`, {
         user: {
@@ -71,7 +73,7 @@ const Login: FC = (): ReactElement => {
           <Input
             type={'text'}
             position={'relative'}
-            label={'User Name'}
+            label={t('User Name')}
             placeholder={'Zeus'}
             onError={onError}
             {...bindUserName}
@@ -92,7 +94,7 @@ const Login: FC = (): ReactElement => {
           <Input
             type={'password'}
             position={'relative'}
-            label={'Password'}
+            label={t('Password')}
             placeholder={'sec2re-pass4rd'}
             onError={onError}
             {...bindUserPassword}
@@ -110,12 +112,12 @@ const Login: FC = (): ReactElement => {
           </div>
         </div>
         <span className={'text-sm font-light mb-4'}>
-          <Link href={'/'}>Forgot password?</Link>
+          <Link href={'/'}>{t('Forgot password?')}</Link>
         </span>
-        <Button onClick={handleSubmit} label={'Login'} />
+        <Button onClick={handleSubmit} label={t('Login')} />
       </div>
       <span className={'text-sm font-light mt-8'}>
-        <Link href={'/SingUp'}>Don't have an account?</Link>
+        <Link href={'/SingUp'}>{t("Don't have an account?")}</Link>
       </span>
       <div className={warningModal ? 'visible' : 'invisible'}>
         <Modal
