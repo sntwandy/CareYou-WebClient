@@ -20,6 +20,7 @@ import axios, { AxiosResponse } from 'axios';
 import Loading from '../../components/Loading';
 import { ISearch, IUser, IDiagnosisResults } from '../../utils/interfaces';
 import JWT from '../../utils/jwt';
+import { useTranslation } from 'react-i18next';
 
 /* ENV VARIABLES */
 const DIAGNOSIS_URL = process.env.DIAGNOSIS_URL;
@@ -77,9 +78,10 @@ const Home: FC = (): ReactElement => {
   ];
 
   /* Initializations */
+  const [t] = useTranslation();
   const filteredInitState: ISearch[] = [];
   const symptomsInitState: string[] = [];
-
+  
   /* Local State */
   const [token, setToken] = useState(String);
   const [userInfo, setUserInfo] = useState<IUser>();
@@ -228,13 +230,13 @@ const Home: FC = (): ReactElement => {
           {/* Title */}
           <div className={'flex items-center justify-center flex-col'}>
             <Title
-              title={'Good Morning'}
+              title={t('Good Morning')}
               fontSize={'text-lg'}
               fontWeight={'font-light'}
               userName={userInfo?.name + ' ' + userInfo?.lastName}
             />
             <Title
-              title={'Welcome to CareYou'}
+              title={t('Welcome to CareYou')}
               fontSize={'text-lg'}
               marginTop={'mt-2'}
               fontWeight={'font-light'}
@@ -247,13 +249,13 @@ const Home: FC = (): ReactElement => {
                 htmlFor={'searchSymptoms'}
                 className={'text-lg font-normal mb-2'}
               >
-                Do you want to do a pre-diagnosis?
+                {t('Do you want to do a pre-diagnosis?')}
               </label>
               <input
                 className={`w-primaryInput h-primaryInput text-lg text-center rounded-tl-input rounded-br-input outline-none bg-tertiary focus:ring-2 focus:ring-black`}
                 type={'string'}
                 name={'searchSymptoms'}
-                placeholder={'Search your symptoms'}
+                placeholder={t('Search your symptoms')}
                 onChange={(e) => handleInputSearch(e)}
               />
               <div>
@@ -279,7 +281,7 @@ const Home: FC = (): ReactElement => {
                 htmlFor={'symptomsSelected'}
                 className={'text-lg font-normal mb-2'}
               >
-                Your selected symptoms:
+                {t('Your selected symptoms')}:
               </label>
               <div
                 className={
@@ -316,9 +318,9 @@ const Home: FC = (): ReactElement => {
               }
             >
               <div className={'mb-4'}>
-                <Button label={'Start test'} onClick={startTest} full={true} />
+                <Button label={t('Start test')} onClick={startTest} full={true} />
               </div>
-              <Button label={'New test'} inverted={true} onClick={newTest} />
+              <Button label={t('New test')} inverted={true} onClick={newTest} />
             </div>
           </div>
           <div className={warningModalToConfirm ? 'visible' : 'invisible'}>
@@ -336,7 +338,7 @@ const Home: FC = (): ReactElement => {
             <WarningModal
               warningModal={warningModal}
               setWarningModal={setWarningModal}
-              message={`You have already selected that symptom`}
+              message={t`You have already selected that symptom`}
             />
           </div>
           <div className={diagnosisModal ? 'visible' : 'invisible'}>

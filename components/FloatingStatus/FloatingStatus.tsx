@@ -1,11 +1,13 @@
 
 import { FC, ReactElement, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   data?: 'available' | 'busy' | 'absent'
   onChange?: (status: string) => void
 }
 export const FloatingStatus: FC<Props> = (props: Props): ReactElement => {
+  const [t] = useTranslation()
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState('available');
 
@@ -35,13 +37,13 @@ export const FloatingStatus: FC<Props> = (props: Props): ReactElement => {
       {/* Menu dropdown */}
       <div hidden={!open} className={(!open ? 'opacity-0': 'opacity-100') + ' transition-opacity transform flex items-start justify-top flex-col origin-top-right absolute left-0 mt-2 bg-primary shadow-lg text-secondary text-xs font-thin ring-1 ring-black ring-opacity-5 divide-y divide-gray-100'} style={{ borderRadius: '5px', width: 'auto' }} role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
         <div className="px-1 w-full flex items-start justify-start pt-1 pb-1 flex content-center justify-between" onClick={() => setStatus('available')} >
-          Available {renderStatus('available')}
+          {t('Available')} {renderStatus('available')}
         </div>
         <div className="px-1 w-full flex items-start justify-start pt-1 pb-1 flex content-center justify-between" onClick={() => setStatus('busy')}>
-          Busy {renderStatus('busy')}
+          {t('Busy')} {renderStatus('busy')}
         </div>
         <div className="px-1 w-full flex items-start justify-start pt-1 pb-1 flex content-center justify-between" onClick={() => setStatus('absent')}>
-          Absent {renderStatus('absent')}
+          {t('Absent')} {renderStatus('absent')}
         </div>
       </div>
     </div>

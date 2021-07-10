@@ -14,6 +14,7 @@ import Button from '../../components/Buttons/PrimaryButton';
 import Title from '../../components/Titles/Title';
 import axios, { AxiosResponse } from 'axios';
 import { IUser } from '../../utils/interfaces';
+import { useTranslation } from 'react-i18next';
 
 /* Env Variables */
 const SINGUP_USERS_URL = process.env.SINGUP_USERS_URL;
@@ -54,6 +55,7 @@ const formSchema = yup.object().shape({
 
 // SingUp
 const SingUp: FC = (): ReactElement => {
+  const [t] = useTranslation();
   const { register, handleSubmit, formState: { errors } } = useForm<IFormSchema>({
     mode: 'all',
     resolver: yupResolver(formSchema)
@@ -83,7 +85,7 @@ const SingUp: FC = (): ReactElement => {
           <img className={'w-full'} src={'https://i.imgur.com/N9aSUrx.png'} alt={'Login img'} />
         </figure>
         <div className={'mb-6'}>
-          <Title title={'Sing Up'} marginTop={'mt-2'} />
+          <Title title={t('SignUp')} marginTop={'mt-2'} />
         </div>
         <div className={'w-primaryInput h-8 rounded-input border-primary border bg-secondary'}>
           <div className={'h-7 bg-primary rounded-input'} style={{ width: progress[step - 1] }} >
@@ -102,50 +104,50 @@ const SingUp: FC = (): ReactElement => {
       <div className={'flex items-center justify-center flex-col'}>
         {step === 1 && (
           <div>
-            <Input label={'First Name'} placeholder={'Zeus'} bind={register('firstName')} required />
+            <Input label={t('First Name')} placeholder={'Zeus'} bind={register('firstName')} required />
             {_renderError('firstName')}
-            <Input label={'Last Name'} placeholder={'Amenadiel'} bind={register('lastName')} required />
+            <Input label={t('Last Name')} placeholder={'Amenadiel'} bind={register('lastName')} required />
             {_renderError('lastName')}
-            <Input label={'Birth Date'} placeholder={'17-09-1995'} bind={register('birthDate')} type={'date'} required />
+            <Input label={t('Birth Date')} placeholder={'17-09-1995'} bind={register('birthDate')} type={'date'} required />
             {_renderError('birthDate')}
-            <Input label={'Gender'} placeholder={'Gender'} bind={register('gender')} required />
+            <Input label={t('Gender')} placeholder={'Gender'} bind={register('gender')} required />
             {_renderError('gender')}
           </div>
         )}
         {step === 2 && (
           <div>
-            <Input label="Country" placeholder="Dominican Republic" bind={register('country')} required />
+            <Input label={t('Country')} placeholder="Dominican Republic" bind={register('country')} required />
             {_renderError('country')}
-            <Input label="Province" placeholder="Santo Domingo" bind={register('province')} required />
+            <Input label={t('Province')} placeholder="Santo Domingo" bind={register('province')} required />
             {_renderError('province')}
-            <Input label="Postal Code" placeholder="41000" bind={register('postalCode')} required />
+            <Input label={t('Postal Code')} placeholder="41000" bind={register('postalCode')} required />
             {_renderError('postalCode')}
-            <Input label="Address Lines" placeholder="Autopista Duarte, #17" bind={register('addressLine')} required />
+            <Input label={t('Address Lines')} placeholder="Autopista Duarte, #17" bind={register('addressLine')} required />
             {_renderError('addressLine')}
           </div>
         )}
         {step === 3 && (
           <div className={'h-sufferingDiv'}>
             <div className={'flex items-center justify-center flex-col mb-3.5'}>
-              <label className={'text-lg font-normal mb-2'}>Description</label>
+              <label className={'text-lg font-normal mb-2'}>{t('Description')}</label>
               <div className={'w-primaryInput pt-4 pb-4 flex items-center justify-center text-base pl-2 pr-2 rounded-tl-input rounded-br-input bg-tertiary'}>
                 <p className={'w-56 font-light'}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 </p>
               </div>
             </div>
-            <Input label="Suffering" placeholder="Tachycardia" bind={register('suffering')} required />
+            <Input label={t('Suffering')} placeholder="Tachycardia" bind={register('suffering')} required />
             {_renderError('suffering')}
           </div>
         )}
         {step === 4 && (
           <div>
-            <Input label="ID Card" placeholder="402-2392919-1" bind={register('idCard')} required />
+            <Input label={t('ID Card')} placeholder="402-2392919-1" bind={register('idCard')} required />
             {_renderError('idCard')}
-            <Input label="User Name" placeholder="zeus_amen" bind={register('userName')} required />
+            <Input label={t('User Name')} placeholder="zeus_amen" bind={register('userName')} required />
             {_renderError('userName')}
-            <Input label="Email" placeholder="zamenadiel@email.com" bind={register('email')} required />
+            <Input label={t('Email')} placeholder="zamenadiel@email.com" bind={register('email')} required />
             {_renderError('email')}
-            <Input label="Password" placeholder="sec2re-pass4rd" bind={register('password')} type="password" required />
+            <Input label={t('Password')} placeholder="sec2re-pass4rd" bind={register('password')} type="password" required />
             {_renderError('password')}
           </div>
         )}
@@ -158,26 +160,26 @@ const SingUp: FC = (): ReactElement => {
         <div className="flex items-center justify-center flex-rows space-x-2 mb-2">
           {step > 1 && step <= 3 && (
             <div className={'mt-4 flex items-center justify-center flex-rows space-x-2'}>
-              <Button onClick={() => setStep(step - 1)} middle={true} label="Back" inverted />
-              <Button onClick={() => setStep(step + 1)} middle={true} label="Next" disabled={ifValidationErrors} />
+              <Button onClick={() => setStep(step - 1)} middle={true} label={t('Back')} inverted/>
+              <Button onClick={() => setStep(step + 1)} middle={true} label={t('Next')} disabled={ifValidationErrors} />
             </div>
           )}
           {step === 1 ? (
             <div className={'mt-4'}>
-              <Button onClick={() => setStep(step + 1)} label="Next" disabled={ifValidationErrors} />
+              <Button onClick={() => setStep(step + 1)} label={t('Next')} disabled={ifValidationErrors} />
             </div>
           ) : step === 4 && (
             <div className={'mt-4 flex items-center justify-center flex-rows space-x-2'}>
-              <Button onClick={() => setStep(step - 1)} middle={true} label="Back" inverted />
+              <Button onClick={() => setStep(step - 1)} middle={true} label={t('Back')} inverted />
               <Button onClick={() => {
                 onSubmit()
-              }} middle={true} label="Finish" type='submit' disabled={ifValidationErrors} />
+              }} middle={true} label={t('Finish')} type='submit' disabled={ifValidationErrors} />
             </div>
           )}
         </div>
       </div>
       <span className="text-sm font-light mt-8">
-        <Link href="/Login">You already have an account?</Link>
+        <Link href="/Login">{t('You already have an account?')}</Link>
       </span>
     </form>
   );

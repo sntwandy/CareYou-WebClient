@@ -3,6 +3,7 @@
  */
 
 import React, { FC, ReactElement, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { IDiagnosisModal } from '../../utils/interfaces';
 
 const DiagnosisResults: FC<IDiagnosisModal> = (
@@ -17,6 +18,7 @@ const DiagnosisResults: FC<IDiagnosisModal> = (
   } = props;
 
   /* Initializations */
+  const [t]= useTranslation();
 
   /* Local State */
   const [backgroundStyle, setBackgroundStyle] = useState(
@@ -83,7 +85,7 @@ const DiagnosisResults: FC<IDiagnosisModal> = (
                   src={
                     'https://res.cloudinary.com/dh9cghj6y/image/upload/v1617446057/CareYou/Icons/diagnosisResults/m3qzqr354iywb4mxv8nt.webp'
                   }
-                  alt={'Diagnosis Results'}
+                  alt={t('Diagnosis Results')}
                 />
               </div>
               <div className={'mt-3 sm:mt-0 sm:ml-4 sm:text-center mb-4'}>
@@ -92,7 +94,7 @@ const DiagnosisResults: FC<IDiagnosisModal> = (
                     className={'text-lg leading-6 font-medium text-gray-900'}
                     id={'modal-headline'}
                   >
-                    Diagnosis Results:
+                    {t('Diagnosis Results')}:
                   </h3>
                 </div>
               </div>
@@ -122,7 +124,7 @@ const DiagnosisResults: FC<IDiagnosisModal> = (
                     setDiagnosisModal(!diagnosisModal);
                   }}
                 >
-                  No
+                  {t('No')}
                 </button>
                 <button
                   type={'button'}
@@ -134,7 +136,7 @@ const DiagnosisResults: FC<IDiagnosisModal> = (
                     setDiagnosisModal(!diagnosisModal);
                   }}
                 >
-                  Yes
+                  {t('Yes')}
                 </button>
               </>
             ) : (
@@ -148,7 +150,7 @@ const DiagnosisResults: FC<IDiagnosisModal> = (
                     setDiagnosisModal(!diagnosisModal);
                   }}
                 >
-                  See details
+                  {t('See details')}
                 </button>
                 <button
                   type={'button'}
@@ -159,7 +161,7 @@ const DiagnosisResults: FC<IDiagnosisModal> = (
                     setDiagnosisModal(!diagnosisModal);
                   }}
                 >
-                  Okay
+                  Ok
                 </button>
               </>
             )}

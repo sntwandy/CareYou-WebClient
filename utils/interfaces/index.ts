@@ -29,8 +29,8 @@ export interface IButtons {
 }
 
 export interface IInputs {
-  onChange: Function;
-  value: any;
+  onChange?: Function;
+  value?: any;
   type?: string;
   placeholder?: string;
   position?: string;

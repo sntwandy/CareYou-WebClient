@@ -2,18 +2,19 @@
  *
  */
 
-import React, { FC, ReactElement, useState } from 'react';
+import React, { FC, ReactElement } from 'react';
 import RecordCard from '../../components/UI/RecordCard';
 import Title from '../../components/Titles/Title';
 import Menu from '../../components/Menu';
 import Auth from '../../utils/auth';
 import { IRecordCard } from '../../utils/interfaces';
 import { FloatingStatus } from '../../components/FloatingStatus/FloatingStatus';
+import { useTranslation } from 'react-i18next';
 
 
 
-const MedicalRecord: FC = (): ReactElement => {
-
+const Appointments: FC = (): ReactElement => {
+  const [t] = useTranslation();
   /* Initializations */
   const records: IRecordCard[] = [{
     date: new Date(),
@@ -37,13 +38,13 @@ const MedicalRecord: FC = (): ReactElement => {
         <div className={'flex items-center justify-center flex-col mb-9'}>
           <div className={'mb-6'}>
             <Title
-              title={'Welcome to CareYou'}
+              title={t('Welcome to CareYou')}
               fontSize={'text-lg'}
               marginTop={'mt-2'}
               fontWeight={'font-light'}
             />
             <Title
-              title={"Today's Appointments"}
+              title={t("Today's Appointments")}
               fontSize={'text-lg'}
               marginTop={'mt-2'}
               fontWeight={'font-bold'}
@@ -58,4 +59,4 @@ const MedicalRecord: FC = (): ReactElement => {
   );
 };
 
-export default MedicalRecord;
+export default Appointments;

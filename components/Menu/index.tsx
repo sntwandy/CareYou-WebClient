@@ -6,10 +6,12 @@ import React ,{ FC, ReactElement, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { IUser } from '../../utils/interfaces';
+import { useTranslation } from 'react-i18next';
 
 const Menu: FC = (): ReactElement => {
 
   /* Initializations */
+  const [t] = useTranslation()
   const router = useRouter();
 
   /* Local State */
@@ -57,26 +59,26 @@ const Menu: FC = (): ReactElement => {
         </div>
         <div className="py-1 w-full flex items-start justify-start pt-4 pb-4">
           <img className={'w-menuIcon ml-4 mr-1'} src="https://i.imgur.com/I7j7gYQ.png" alt="Home icon"/>
-          <Link href={'/Home'}>Home</Link>
+          <Link href={'/Home'}>{t('Home')}</Link>
         </div>
         <div className="py-1 w-full flex items-start justify-start pt-4 pb-4 flex-col">
           <div className={'flex items-center justify-start'}>
             <img className={'w-menuIcon ml-4 mr-1'} src={'https://i.imgur.com/khkvbwh.png'} alt={'Home icon'}/>
-            <Link href={'/Appointments'}>Appointment</Link>
+            <Link href={'/Appointments'}>{t('Appointments')}</Link>
           </div>
           <div className={'flex items-center justify-start mt-4'}>
             <img className={'w-menuIcon ml-4 mr-1'} src={'https://i.imgur.com/2KZ4j6y.png'} alt={'Home icon'}/>
-            <Link href={'/MedicalRecord'}>Medical Record</Link>
+            <Link href={'/MedicalRecord'}>{t('Medical Record')}</Link>
           </div>
         </div>
         <div className="py-1 w-full flex items-start justify-start pt-4 pb-4 flex-col">
           <div className={'flex items-center justify-start'}>
             <img className={'w-menuIcon ml-4 mr-1'} src={'https://i.imgur.com/XtDqCeA.png'} alt={'Home icon'}/>
-            <Link href={'/'}>Settings</Link>
+            <Link href={'/'}>{t('Settings')}</Link>
           </div>
           <div className={'flex items-center justify-start mt-4'}>
             <img className={'w-menuIcon ml-4 mr-1'} src={'https://i.imgur.com/htDTXgq.png'} alt={'Home icon'}/>
-              <button onClick={logout}>Logout</button>
+              <button onClick={logout}>{t('Logout')}</button>
           </div>
         </div>
       </div>
