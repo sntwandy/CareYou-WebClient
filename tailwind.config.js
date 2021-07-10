@@ -75,6 +75,7 @@ module.exports = {
       secondary: '#F4F4F4',
       primaryButtonHover: '#BABABA',
       secondaryButtonHover: '#343434',
+      termsConditions: '#e3342f',
     },
     borderWidth: {
       DEFAULT: '1px',

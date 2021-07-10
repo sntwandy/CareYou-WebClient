@@ -19,6 +19,7 @@ import Auth from '../../utils/auth';
 import axios, { AxiosResponse } from 'axios';
 import Loading from '../../components/Loading';
 import { ISearch, IUser, IDiagnosisResults } from '../../utils/interfaces';
+import TermsConditionsModal from '../../components/Modals/TermsAndConditions';
 import JWT from '../../utils/jwt';
 import { useTranslation } from 'react-i18next';
 
@@ -94,6 +95,11 @@ const Home: FC = (): ReactElement => {
   const [diagnosisModal, setDiagnosisModal] = useState(false);
   const [diagnosisResults, setDiagnosisResults] = useState<IDiagnosisResults>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [emptySymptoms, setEmptySymptoms] = useState<boolean>(false);
+  const [termsConditionsModal, setTermsConditionsModal] =
+    useState<boolean>(false);
+  const [termsConditionsAccepted, setTermsConditionsAccepted] =
+    useState<boolean>(false);
 
   /* Functions */
   const handleInputSearch = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -130,26 +136,34 @@ const Home: FC = (): ReactElement => {
   };
 
   const startTest = async () => {
-    setIsLoading(true);
-    const token = localStorage.getItem('Token');
-    try {
-      const response: AxiosResponse = await axios.post(
-        `${DIAGNOSIS_URL}`,
-        {
-          symptoms,
-        },
-        {
-          headers: {
-            Authorization: token,
-          },
+    if (symptoms.length) {
+      if (termsConditionsAccepted) {
+        setIsLoading(true);
+        const token = localStorage.getItem('Token');
+        console.log(symptoms);
+        try {
+          const response: AxiosResponse = await axios.post(
+            `${DIAGNOSIS_URL}`,
+            {
+              symptoms,
+            },
+            {
+              headers: {
+                Authorization: token,
+              },
+            }
+          );
+          response.data.body && setIsLoading(false);
+          await setDiagnosisResults(response.data.body);
+          setDiagnosisModal(true);
+        } catch (error) {
+          console.log(error);
         }
-      );
-      response.data.body && setIsLoading(false);
-      await setDiagnosisResults(response.data.body);
-      console.log();
-      setDiagnosisModal(true);
-    } catch (error) {
-      console.log(error);
+      } else {
+        setTermsConditionsModal(!termsConditionsModal);
+      }
+    } else {
+      setEmptySymptoms(true);
     }
   };
 
@@ -221,6 +235,12 @@ const Home: FC = (): ReactElement => {
     token && JWT(token) ? getUserInfo() : null;
   }, [token]);
 
+  useEffect(() => {
+    termsConditionsAccepted && startTest();
+  }, [termsConditionsAccepted]);
+
+  console.log(termsConditionsAccepted);
+
   return (
     <>
       <Auth>
@@ -259,15 +279,19 @@ const Home: FC = (): ReactElement => {
                 onChange={(e) => handleInputSearch(e)}
               />
               <div>
-                <ul style={{ height: 32*4, overflowY: 'scroll' }} className={'w-primaryInput h-auto text-center mt-2 bg-primary text-secondary font-extralight capitalize rounded-tl-input rounded-br-input'}>
+                <ul
+                  className={
+                    'w-primaryInput max-h-36 overflow-scroll overscroll-y-auto h-auto text-center mt-2 bg-primary text-secondary font-extralight capitalize rounded-tl-input rounded-br-input'
+                  }
+                >
                   {filteredSymptoms.map((item) => {
                     return (
                       <li
                         key={item.id}
-                        onClick={(e) =>
-                          setMySymptoms(e.currentTarget.innerText)
+                        onClick={(e) => setMySymptoms(item.name)}
+                        className={
+                          'cursor-pointer text-lg text-white mb-1 mt-1 hover:text-primary hover:bg-secondary'
                         }
-                        className={'cursor-pointer text-lg text-white mb-1 mt-1 hover:text-primary hover:bg-secondary'}
                       >
                         {item.name}
                       </li>
@@ -335,18 +359,37 @@ const Home: FC = (): ReactElement => {
             <Loading />
           </div>
           <div className={warningModal ? 'visible' : 'invisible'}>
+            {/* When you selecte the same symptom */}
             <WarningModal
               warningModal={warningModal}
               setWarningModal={setWarningModal}
               message={t`You have already selected that symptom`}
             />
           </div>
+          <div className={emptySymptoms ? 'visible' : 'invisible'}>
+            {/* When you start the test and you don't have any symptom selected */}
+            <WarningModal
+              warningModal={emptySymptoms}
+              setWarningModal={setEmptySymptoms}
+              message={`You need to select your symptoms before make the pre-diagnosis.`}
+            />
+          </div>
+          <div className={termsConditionsModal ? 'visible' : 'invisible'}>
+            {/* Before start the test you need to accept Terms and Conditions */}
+            <TermsConditionsModal
+              termsConditionsModal={termsConditionsModal}
+              setTermsConditionsModal={setTermsConditionsModal}
+              setTermsConditionsAccepted={setTermsConditionsAccepted}
+            />
+          </div>
           <div className={diagnosisModal ? 'visible' : 'invisible'}>
+            {/* While the pre-diagnosis process is running, answers questions and see the final result */}
             <DiagnosisModal
               diagnosisModal={diagnosisModal}
               setDiagnosisModal={setDiagnosisModal}
               diagnosisResults={diagnosisResults}
               sendAnswer={sendAnswer}
+              setTermsConditionsAccepted={setTermsConditionsAccepted}
             />
           </div>
           {/* <button>Add</button> */}
