@@ -57,6 +57,7 @@ module.exports = {
       buttonDiagnosisResults: '2rem',
       diagnosisResultsPercent: '1.60rem',
       diagnosisResultsPercent2: '1.50rem',
+      professionalRecommendation: '20rem',
       list: '1.25rem',
       full: '100vh',
       3: '0.75rem',

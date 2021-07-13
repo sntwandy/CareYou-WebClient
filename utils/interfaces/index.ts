@@ -150,3 +150,13 @@ export interface IAnalysis {
     };
   }[];
 }
+
+export interface IProfessionals {
+  country: string;
+  description: string;
+  lastName: string;
+  name: string;
+  province: string;
+  medicalCenters: string[];
+  specialties: string[];
+}
