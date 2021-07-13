@@ -130,3 +130,23 @@ export interface ITermsConditionsModal {
   setTermsConditionsModal: (value: boolean) => void;
   setTermsConditionsAccepted: (value: boolean) => void;
 }
+
+export interface IAnalysis {
+  date: string;
+  finalResults: string;
+  idUser: string;
+  analysis: {
+    approved: boolean;
+    diseaseName: string;
+    pathologies: {
+      pathologyName: string;
+      pathologyValidation: boolean;
+      wasAnalyzed: boolean;
+    }[];
+    symptomsResults: {
+      diseaseSymptoms: string[];
+      symptomsMatch: string[];
+      userSymptoms: string[];
+    };
+  }[];
+}

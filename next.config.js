@@ -11,5 +11,6 @@ module.exports = {
     LOGIN_USERS_URL: 'http://localhost:3000/api/users/login',
     SINGUP_USERS_URL: 'http://localhost:3000/api/users/singup',
     DIAGNOSIS_URL: 'http://localhost:3000/api/diagnosis',
+    GET_ANALYSIS_URL: 'http://localhost:3000/api/diagnosis/results',
   },
 };

@@ -3,6 +3,7 @@
  */
 
 import React, { FC, ReactElement, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { IDiagnosisModal } from '../../utils/interfaces';
 
 const DiagnosisResults: FC<IDiagnosisModal> = (
@@ -18,6 +19,7 @@ const DiagnosisResults: FC<IDiagnosisModal> = (
   } = props;
 
   /* Initializations */
+  const router = useRouter();
 
   /* Local State */
   const [backgroundStyle, setBackgroundStyle] = useState(
@@ -148,6 +150,10 @@ const DiagnosisResults: FC<IDiagnosisModal> = (
                   onClick={() => {
                     setTermsConditionsAccepted(false);
                     setDiagnosisModal(!diagnosisModal);
+                    router.push({
+                      pathname: '/DiagnosisDetails/[id]',
+                      query: { id: 674890 },
+                    });
                   }}
                 >
                   See details
