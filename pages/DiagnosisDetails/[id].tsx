@@ -241,6 +241,131 @@ const DiagnosisDetails: FC = (): JSX.Element => {
               </div>
             </>
           ))}
+          {/* Professionals Recommendations */}
+          <div
+            className={
+              'mb-6 w-full flex items-center justify-start flex-col mt-10'
+            }
+          >
+            <img
+              width={40}
+              height={40}
+              src={'https://i.imgur.com/MpLul9z.png'}
+              alt={'Notepad Icon'}
+            />
+            <SubTitle
+              title={'CareYou recommendations:'}
+              fontSize={'text-xl'}
+              marginTop={'0'}
+            />
+            <div className={'max-w-prediagDeta'}>
+              <ul
+                className={
+                  'w-full max-w-prediagDeta flex items-center justify-start overflow-x-auto'
+                }
+              >
+                <li
+                  className={
+                    'w-professionalRecommendation min-w-professionalRecommendation ml-4 mr-4 pt-2 pb-2 pl-4 pr-4 text-lg text-start rounded-tl-input rounded-br-input bg-primary'
+                  }
+                >
+                  <div className={'flex items-center justify-start'}>
+                    <img
+                      width={30}
+                      height={30}
+                      src={'https://i.imgur.com/EFGVCkB.png'}
+                    />
+                    <span className={'text-secondary ml-2'}>
+                      Darcy Bartolome
+                    </span>
+                  </div>
+                  <div
+                    className={
+                      'flex items-center text-center justify-center flex-col'
+                    }
+                  >
+                    <span className={'text-secondary text-sm'}>
+                      I'm glad to have the opportunity to be your doctor, with
+                      my 6+ years of medical experiences, I'll can help you...
+                    </span>
+                  </div>
+                  <div className={'flex items-center justify-start'}>
+                    <img
+                      width={30}
+                      height={30}
+                      src={'https://i.imgur.com/4Ow0WDX.png'}
+                    />
+                    <span className={'text-secondary ml-2'}>Pneumology</span>
+                  </div>
+                  <div
+                    className={
+                      'w-full flex items-center justify-center pt-4 pb-2'
+                    }
+                  >
+                    <button
+                      onClick={() => router.push('/Home')}
+                      type={'button'}
+                      className={
+                        'w-auto justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-secondary text-base font-medium text-primary hover:text-primaryButtonHover focus:outline-none focus:ring-2 focus:ring-offset-2 sm:ml-3 sm:text-sm'
+                      }
+                    >
+                      Requ. Appointment
+                    </button>
+                  </div>
+                </li>
+
+                <li
+                  className={
+                    'w-professionalRecommendation min-w-professionalRecommendation pt-2 pb-2 pl-4 pr-4 text-lg text-start rounded-tl-input rounded-br-input bg-primary'
+                  }
+                >
+                  <div className={'flex items-center justify-start'}>
+                    <img
+                      width={30}
+                      height={30}
+                      src={'https://i.imgur.com/EFGVCkB.png'}
+                    />
+                    <span className={'text-secondary ml-2'}>
+                      Darcy Bartolome
+                    </span>
+                  </div>
+                  <div
+                    className={
+                      'flex items-center text-center justify-center flex-col'
+                    }
+                  >
+                    <span className={'text-secondary text-sm'}>
+                      I'm glad to have the opportunity to be your doctor, with
+                      my 6+ years of medical experiences, I'll can help you...
+                    </span>
+                  </div>
+                  <div className={'flex items-center justify-start'}>
+                    <img
+                      width={30}
+                      height={30}
+                      src={'https://i.imgur.com/4Ow0WDX.png'}
+                    />
+                    <span className={'text-secondary ml-2'}>Pneumology</span>
+                  </div>
+                  <div
+                    className={
+                      'w-full flex items-center justify-center pt-4 pb-2'
+                    }
+                  >
+                    <button
+                      onClick={() => router.push('/Home')}
+                      type={'button'}
+                      className={
+                        'w-auto justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-secondary text-base font-medium text-primary hover:text-primaryButtonHover focus:outline-none focus:ring-2 focus:ring-offset-2 sm:ml-3 sm:text-sm'
+                      }
+                    >
+                      Requ. Appointment
+                    </button>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
           <button
             onClick={() => router.push('/Home')}
             type={'button'}

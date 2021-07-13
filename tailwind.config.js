@@ -1,5 +1,12 @@
 module.exports = {
   theme: {
+    minWidth: {
+      professionalRecommendation: '14rem',
+      '1/4': '25%',
+      '1/2': '50%',
+      '3/4': '75%',
+      full: '100%',
+    },
     borderWidth: {
       DEFAULT: '1px',
       0: '0',
@@ -19,6 +26,7 @@ module.exports = {
         primaryButton: '12.5rem',
         primaryInput: '16.875rem',
         diagnosisResults: '15.875rem',
+        professionalRecommendation: '14rem',
         buttonMiddle: '7.313rem',
         title: '16.875rem',
         menuButton: '3.313rem',
@@ -26,6 +34,7 @@ module.exports = {
         menu: '12.131rem',
         menuImg: '4.375rem',
         3: '0.75rem',
+        full: '100%',
       },
       backgroundImage: (theme) => ({
         'bg-mobile': "url('https://i.imgur.com/2tSOxVz.jpg')",
