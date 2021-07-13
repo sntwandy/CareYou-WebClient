@@ -10,24 +10,25 @@ import Auth from '../../utils/auth';
 import { IRecordCard } from '../../utils/interfaces';
 import { FloatingStatus } from '../../components/FloatingStatus/FloatingStatus';
 
-
-
 const MedicalRecord: FC = (): ReactElement => {
-
   /* Initializations */
-  const records: IRecordCard[] = [{
-    date: new Date(),
-    attendant: 'Megan Herrera',
-    case: 'Flu',
-  }, {
-    date: new Date(),
-    attendant: 'Megan Herrera',
-    case: 'Flu'
-  }, {
-    date: new Date(),
-    attendant: 'Megan Herrera',
-    case: 'Flu'
-  }];
+  const records: IRecordCard[] = [
+    {
+      date: new Date(),
+      attendant: 'Megan Herrera',
+      case: 'Flu',
+    },
+    {
+      date: new Date(),
+      attendant: 'Megan Herrera',
+      case: 'Flu',
+    },
+    {
+      date: new Date(),
+      attendant: 'Megan Herrera',
+      case: 'Flu',
+    },
+  ];
 
   return (
     <Auth>
@@ -50,8 +51,19 @@ const MedicalRecord: FC = (): ReactElement => {
             />
           </div>
         </div>
-        <div className={'flex items-center justify-center flex-row overflow-x-auto'} style={{ display: '-webkit-inline-box' }}>
-          {records.map((record, index) => <RecordCard key={index} record={record} dateFormat={'yyyy/MM/dd hh:mm a'} />)}
+        <div
+          className={
+            'flex items-center justify-center flex-row overflow-x-auto'
+          }
+          style={{ display: '-webkit-inline-box' }}
+        >
+          {records.map((record, index) => (
+            <RecordCard
+              key={index}
+              record={record}
+              dateFormat={'yyyy/MM/dd hh:mm a'}
+            />
+          ))}
         </div>
       </div>
     </Auth>

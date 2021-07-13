@@ -3,7 +3,7 @@
  */
 
 import React, { FC, ReactElement } from 'react';
-import { ITitle } from '../../utils/interfaces';
+import { ITitle } from '../../../utils/interfaces';
 
 const Title: FC<ITitle> = (props: ITitle): ReactElement => {
   /* Destructuring Props */
@@ -16,11 +16,11 @@ const Title: FC<ITitle> = (props: ITitle): ReactElement => {
   } = props;
 
   return (
-    <h1
-      className={`w-title h-title flex items-center justify-center ${marginTop} ${fontWeight} ${fontSize}`}
+    <h3
+      className={`w-title h-title flex capitalize items-center justify-center ${marginTop} ${fontWeight} ${fontSize}`}
     >
       {title} {userName && userName + ','}
-    </h1>
+    </h3>
   );
 };
 
